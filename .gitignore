@@ -1,0 +1,13 @@
+node_modules/
+dist/
+.env
+.env.*
+
+# Arquivos de referencia usados para montar o site
+Apresentação SisGestao.pdf
+mapa-atestados-editais-software.pdf
+
+# Sistema operacional e editores
+.DS_Store
+Thumbs.db
+.vscode/
