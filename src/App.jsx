@@ -1,17 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import logo from "../Capa = Insta.png";
-import storyPreview from "../stories/2026.05.25.png";
-
-const WHATSAPP_URL = "https://wa.me/5579996101392";
-const EMAIL = "sisgestao@outlook.com";
-const INSTAGRAM_URL = "https://instagram.com/sisgestaosoft";
-
-const navItems = [
-  { label: "Soluções", href: "#solucoes" },
-  { label: "Diferenciais", href: "#diferenciais" },
-  { label: "Método", href: "#metodo" },
-  { label: "Contato", href: "#contato" },
-];
+import storyPreview from "../stories/stories 26.05.25 (1).png";
+import { COMPANY, WHATSAPP_URL, INSTAGRAM_URL } from "./company.js";
+import Header from "./Header.jsx";
+import Footer from "./Footer.jsx";
+import PrivacyPage from "./PrivacyPage.jsx";
+import TermsPage from "./TermsPage.jsx";
 
 const solutions = [
   {
@@ -79,47 +73,19 @@ const audiences = [
   "Associações",
 ];
 
-function Header() {
-  const [isOpen, setIsOpen] = useState(false);
+function usePathname() {
+  const [pathname, setPathname] = useState(() => window.location.pathname);
 
-  function closeMenu() {
-    setIsOpen(false);
-  }
+  useEffect(() => {
+    function onPopState() {
+      setPathname(window.location.pathname);
+    }
 
-  return (
-    <header className="site-header">
-      <nav className="container nav" aria-label="Navegação principal">
-        <a className="brand" href="#topo" onClick={closeMenu}>
-          <img src={logo} alt="Logo da SISgestão" />
-          <span>SISgestão</span>
-        </a>
+    window.addEventListener("popstate", onPopState);
+    return () => window.removeEventListener("popstate", onPopState);
+  }, []);
 
-        <button
-          className="menu-button"
-          type="button"
-          aria-expanded={isOpen}
-          aria-controls="site-menu"
-          onClick={() => setIsOpen((current) => !current)}
-        >
-          <span />
-          <span />
-          <span />
-          <span className="sr-only">Abrir menu</span>
-        </button>
-
-        <div className={`nav-links ${isOpen ? "is-open" : ""}`} id="site-menu">
-          {navItems.map((item) => (
-            <a key={item.href} href={item.href} onClick={closeMenu}>
-              {item.label}
-            </a>
-          ))}
-          <a className="nav-cta" href={WHATSAPP_URL} target="_blank" rel="noreferrer">
-            Fale conosco
-          </a>
-        </div>
-      </nav>
-    </header>
-  );
+  return pathname;
 }
 
 function DashboardMockup() {
@@ -333,13 +299,33 @@ function Contact() {
             Conte o que você precisa organizar. A SISgestão transforma sua necessidade em uma
             solução digital simples, segura e inteligente, inclusive com automações e agentes de IA.
           </p>
+
+          <div className="company-info">
+            <p className="eyebrow">Sobre a empresa</p>
+            <p>
+              <strong>{COMPANY.brand}</strong> é a marca comercial de{" "}
+              <strong>{COMPANY.legalName}</strong>, inscrita no CNPJ{" "}
+              <strong>{COMPANY.cnpj}</strong>.
+            </p>
+            <ul className="company-info-list">
+              <li>
+                <strong>Razão social:</strong> {COMPANY.legalName}
+              </li>
+              <li>
+                <strong>CNPJ:</strong> {COMPANY.cnpj}
+              </li>
+              <li>
+                <strong>Endereço:</strong> {COMPANY.address}
+              </li>
+            </ul>
+          </div>
         </div>
 
         <div className="contact-card">
           <a href={WHATSAPP_URL} target="_blank" rel="noreferrer">
-            WhatsApp: (79) 99610-1392
+            WhatsApp: {COMPANY.phoneDisplay}
           </a>
-          <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
+          <a href={`mailto:${COMPANY.email}`}>{COMPANY.email}</a>
           <a href={INSTAGRAM_URL} target="_blank" rel="noreferrer">
             Instagram: @sisgestaosoft
           </a>
@@ -352,21 +338,7 @@ function Contact() {
   );
 }
 
-function Footer() {
-  return (
-    <footer className="footer">
-      <div className="container footer-content">
-        <a className="brand footer-brand" href="#topo">
-          <img src={logo} alt="" />
-          <span>SISgestão</span>
-        </a>
-        <p>Soluções inteligentes para gestão.</p>
-      </div>
-    </footer>
-  );
-}
-
-export default function App() {
+function HomePage() {
   return (
     <>
       <Header />
@@ -382,4 +354,22 @@ export default function App() {
       <Footer />
     </>
   );
+}
+
+function normalizePath(pathname) {
+  return pathname.replace(/\/+$/, "") || "/";
+}
+
+export default function App() {
+  const pathname = normalizePath(usePathname());
+
+  if (pathname === "/privacidade") {
+    return <PrivacyPage />;
+  }
+
+  if (pathname === "/termos") {
+    return <TermsPage />;
+  }
+
+  return <HomePage />;
 }
