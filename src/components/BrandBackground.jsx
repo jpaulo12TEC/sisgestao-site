@@ -55,13 +55,13 @@ function LeftAccent({ className = "", desktop = false }) {
   );
 }
 
-function RightAccent({ glow = false, uid, desktop = false }) {
+function RightAccent({ glow = false, uid, desktop = false, className = "" }) {
   const glowId = `s-glow-${uid}`;
   const blurId = `glow-blur-${uid}`;
 
   return (
     <svg
-      className="brand-bg__svg brand-bg__svg--right"
+      className={`brand-bg__svg brand-bg__svg--right ${className}`.trim()}
       viewBox={desktop ? "0 0 900 720" : "330 0 570 720"}
       preserveAspectRatio={desktop ? "xMaxYMid slice" : "xMidYMid meet"}
       xmlns="http://www.w3.org/2000/svg"
@@ -131,33 +131,43 @@ export default function BrandBackground({ variant = "hero", glow = false }) {
 
 export function SiteBackdrop() {
   const desktop = useDesktopBrand();
+  const uid = useId();
 
   return (
     <div className="site-backdrop" aria-hidden="true">
       <LeftAccent className="site-backdrop__left" desktop={desktop} />
-      <svg
-        className="site-backdrop__right"
-        viewBox={desktop ? "0 0 900 720" : "330 0 570 720"}
-        preserveAspectRatio={desktop ? "xMaxYMid slice" : "xMidYMid meet"}
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path
-          className="site-backdrop__s"
-          d={S_OUTER}
-          fill="none"
-          stroke="rgba(255,255,255,0.03)"
-          strokeWidth="2"
-          strokeDasharray="2 10"
+      {desktop ? (
+        <svg
+          className="site-backdrop__right site-backdrop__right--ghost"
+          viewBox="0 0 900 720"
+          preserveAspectRatio="xMaxYMid slice"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            className="site-backdrop__s"
+            d={S_OUTER}
+            fill="none"
+            stroke="rgba(255,255,255,0.03)"
+            strokeWidth="2"
+            strokeDasharray="2 10"
+          />
+          <path
+            className="site-backdrop__s"
+            d={S_INNER}
+            fill="none"
+            stroke="rgba(255,255,255,0.02)"
+            strokeWidth="1.5"
+            strokeDasharray="2 10"
+          />
+        </svg>
+      ) : (
+        <RightAccent
+          glow
+          uid={uid}
+          desktop={false}
+          className="site-backdrop__right site-backdrop__right--live"
         />
-        <path
-          className="site-backdrop__s"
-          d={S_INNER}
-          fill="none"
-          stroke="rgba(255,255,255,0.02)"
-          strokeWidth="1.5"
-          strokeDasharray="2 10"
-        />
-      </svg>
+      )}
     </div>
   );
 }
