@@ -141,31 +141,29 @@ export function SiteBackdrop() {
   return (
     <div className="site-backdrop" aria-hidden="true">
       <LeftAccent className="site-backdrop__left" desktop={desktop} />
-      {desktop && (
-        <svg
-          className="site-backdrop__right site-backdrop__right--ghost"
-          viewBox="0 0 900 720"
-          preserveAspectRatio="xMaxYMid slice"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            className="site-backdrop__s"
-            d={S_OUTER}
-            fill="none"
-            stroke="rgba(255,255,255,0.03)"
-            strokeWidth="2"
-            strokeDasharray="2 10"
-          />
-          <path
-            className="site-backdrop__s"
-            d={S_INNER}
-            fill="none"
-            stroke="rgba(255,255,255,0.02)"
-            strokeWidth="1.5"
-            strokeDasharray="2 10"
-          />
-        </svg>
-      )}
+      <svg
+        className={`site-backdrop__right site-backdrop__right--ghost${desktop ? "" : " site-backdrop__right--mobile"}`}
+        viewBox="0 0 900 720"
+        preserveAspectRatio="xMaxYMid slice"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          className="site-backdrop__s"
+          d={S_OUTER}
+          fill="none"
+          stroke="rgba(255,255,255,0.03)"
+          strokeWidth="2"
+          strokeDasharray="2 10"
+        />
+        <path
+          className="site-backdrop__s"
+          d={S_INNER}
+          fill="none"
+          stroke="rgba(255,255,255,0.02)"
+          strokeWidth="1.5"
+          strokeDasharray="2 10"
+        />
+      </svg>
     </div>
   );
 }

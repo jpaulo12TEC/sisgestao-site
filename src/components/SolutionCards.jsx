@@ -2,14 +2,37 @@ import { useCallback, useEffect, useRef, useState } from "react";
 
 const ROTATE_MS = 4000;
 
+function ChevronIcon({ direction = "left" }) {
+  return (
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+      <path
+        d={direction === "left" ? "M10 3L5 8L10 13" : "M6 3L11 8L6 13"}
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
 export default function SolutionsShowcase({ items }) {
   const [active, setActive] = useState(0);
   const [paused, setPaused] = useState(false);
   const containerRef = useRef(null);
   const listRef = useRef(null);
   const itemRefs = useRef([]);
+  const touchRef = useRef({ startX: 0, deltaX: 0 });
   const [inView, setInView] = useState(false);
   const [scrollEdges, setScrollEdges] = useState({ start: true, end: false });
+
+  const goTo = useCallback(
+    (index) => setActive((index + items.length) % items.length),
+    [items.length],
+  );
+
+  const goPrev = useCallback(() => goTo(active - 1), [active, goTo]);
+  const goNext = useCallback(() => goTo(active + 1), [active, goTo]);
 
   const updateScrollEdges = useCallback(() => {
     const list = listRef.current;
@@ -66,13 +89,13 @@ export default function SolutionsShowcase({ items }) {
   }, [items.length, updateScrollEdges]);
 
   useEffect(() => {
-    if (window.matchMedia("(min-width: 681px)").matches) return;
+    if (window.matchMedia("(min-width: 981px)").matches) return;
 
     const list = listRef.current;
     const item = itemRefs.current[active];
     if (!list || !item) return;
 
-    const targetLeft = item.offsetLeft;
+    const targetLeft = item.offsetLeft - (list.clientWidth - item.offsetWidth) / 2;
 
     list.scrollTo({ left: Math.max(0, targetLeft), behavior: "smooth" });
   }, [active]);
@@ -80,6 +103,25 @@ export default function SolutionsShowcase({ items }) {
   useEffect(() => {
     updateScrollEdges();
   }, [active, updateScrollEdges]);
+
+  const handleStageTouchStart = (event) => {
+    touchRef.current.startX = event.touches[0].clientX;
+    touchRef.current.deltaX = 0;
+    setPaused(true);
+  };
+
+  const handleStageTouchMove = (event) => {
+    touchRef.current.deltaX = event.touches[0].clientX - touchRef.current.startX;
+  };
+
+  const handleStageTouchEnd = () => {
+    const { deltaX } = touchRef.current;
+    if (Math.abs(deltaX) > 48) {
+      if (deltaX < 0) goNext();
+      else goPrev();
+    }
+    setPaused(false);
+  };
 
   return (
     <div
@@ -141,7 +183,13 @@ export default function SolutionsShowcase({ items }) {
         {items[active].title}
       </p>
 
-      <div className="sol-showcase__stage">
+      <div
+        className="sol-showcase__stage"
+        onTouchStart={handleStageTouchStart}
+        onTouchMove={handleStageTouchMove}
+        onTouchEnd={handleStageTouchEnd}
+        onTouchCancel={handleStageTouchEnd}
+      >
         {items.map((item, index) => (
           <div
             key={item.title}
@@ -157,6 +205,40 @@ export default function SolutionsShowcase({ items }) {
           </div>
         ))}
         <div className="sol-showcase__stage-glow" aria-hidden="true" />
+      </div>
+
+      <div className="sol-showcase__carousel-nav">
+        <button
+          type="button"
+          className="sol-showcase__nav-btn"
+          onClick={goPrev}
+          aria-label="Solução anterior"
+        >
+          <ChevronIcon direction="left" />
+        </button>
+
+        <div className="sol-showcase__dots" role="tablist" aria-label="Navegar soluções">
+          {items.map((item, index) => (
+            <button
+              key={item.title}
+              type="button"
+              role="tab"
+              aria-selected={index === active}
+              aria-label={item.title}
+              className={`sol-showcase__dot${index === active ? " is-active" : ""}`}
+              onClick={() => setActive(index)}
+            />
+          ))}
+        </div>
+
+        <button
+          type="button"
+          className="sol-showcase__nav-btn"
+          onClick={goNext}
+          aria-label="Próxima solução"
+        >
+          <ChevronIcon direction="right" />
+        </button>
       </div>
     </div>
   );
