@@ -2225,15 +2225,26 @@ h3 {
 
   .hero .brand-bg__svg--right {
     display: block;
+    right: -30%;
+    top: -10%;
+    width: 110%;
+    height: 120%;
+    transform: none;
+    opacity: 0.82;
   }
 
-  .hero .brand-bg__svg--right {
-    right: -10%;
-    top: 0;
-    width: 68%;
-    height: 100%;
-    transform: none;
-    opacity: 0.7;
+  .hero .brand-bg__svg--left {
+    display: none;
+  }
+
+  .hero .brand-bg__line--right.brand-bg__line--s-outer {
+    stroke: rgba(255, 255, 255, 0.48);
+    stroke-width: 2.5;
+  }
+
+  .hero .brand-bg__line--right.brand-bg__line--s-inner {
+    stroke: rgba(255, 255, 255, 0.32);
+    stroke-width: 2;
   }
 
   .brand-bg__line--right.brand-bg__line--s-outer {
@@ -2286,11 +2297,7 @@ h3 {
   }
 
   .site-backdrop__left {
-    left: 0;
-    top: 0;
-    width: 56%;
-    height: 40%;
-    opacity: 0.55;
+    display: none;
   }
 
   .site-backdrop__left .brand-bg__line {
@@ -2426,6 +2433,32 @@ h3 {
     gap: 12px;
     order: 2;
     padding: 0 2px;
+  }
+
+  #diferenciais .brand-bg,
+  #metodo .brand-bg {
+    display: none;
+  }
+
+  #diferenciais .diff-card {
+    background: #131519;
+    border-color: rgba(255, 255, 255, 0.12);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+  }
+
+  #metodo .method-trail__step {
+    background: #131519;
+    border-color: rgba(255, 255, 255, 0.12);
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.3);
+  }
+
+  #metodo .method-trail__step.is-active {
+    background: #161a22;
+    border-color: rgba(0, 85, 255, 0.4);
+  }
+
+  #metodo .method-trail__step.is-done {
+    background: #131519;
   }
 }
 
