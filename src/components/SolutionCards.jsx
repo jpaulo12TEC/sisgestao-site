@@ -72,10 +72,7 @@ export default function SolutionsShowcase({ items }) {
     const item = itemRefs.current[active];
     if (!list || !item) return;
 
-    const listRect = list.getBoundingClientRect();
-    const itemRect = item.getBoundingClientRect();
-    const targetLeft =
-      list.scrollLeft + (itemRect.left - listRect.left) - (listRect.width - itemRect.width) / 2;
+    const targetLeft = item.offsetLeft;
 
     list.scrollTo({ left: Math.max(0, targetLeft), behavior: "smooth" });
   }, [active]);
@@ -139,6 +136,10 @@ export default function SolutionsShowcase({ items }) {
           {String(active + 1).padStart(2, "0")} / {String(items.length).padStart(2, "0")}
         </span>
       </div>
+
+      <p className="sol-showcase__current" aria-live="polite">
+        {items[active].title}
+      </p>
 
       <div className="sol-showcase__stage">
         {items.map((item, index) => (
