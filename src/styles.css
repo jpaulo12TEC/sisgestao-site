@@ -414,27 +414,6 @@ button {
   opacity: 0.7;
 }
 
-.site-backdrop__right--mobile {
-  right: -8%;
-  top: 4%;
-  width: 62%;
-  height: 52%;
-  transform: none;
-  opacity: 0.55;
-}
-
-.site-backdrop__right--mobile .site-backdrop__s {
-  stroke: rgba(255, 255, 255, 0.22);
-  stroke-width: 2;
-  stroke-dasharray: 3 7;
-  vector-effect: non-scaling-stroke;
-}
-
-.site-backdrop__right--mobile .site-backdrop__s:last-child {
-  stroke: rgba(255, 255, 255, 0.16);
-  stroke-width: 1.5;
-}
-
 .site-backdrop__right--live {
   left: auto;
   right: -24%;
@@ -2238,21 +2217,23 @@ h3 {
 }
 
 @media (max-width: 680px) {
-  .brand-bg--hero .brand-bg__svg--right {
+  /* S apenas na seção 1 (hero) no mobile */
+  .brand-bg__svg--right,
+  .site-backdrop__right {
+    display: none;
+  }
+
+  .hero .brand-bg__svg--right {
+    display: block;
+  }
+
+  .hero .brand-bg__svg--right {
     right: -10%;
     top: 0;
     width: 68%;
     height: 100%;
     transform: none;
     opacity: 0.7;
-  }
-
-  .brand-bg__svg--right {
-    right: -8%;
-    width: 65%;
-    height: 100%;
-    transform: none;
-    opacity: 0.6;
   }
 
   .brand-bg__line--right.brand-bg__line--s-outer {
