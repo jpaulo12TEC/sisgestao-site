@@ -58,15 +58,15 @@ function LeftAccent({ className = "", desktop = false }) {
 function RightAccent({ glow = false, uid, desktop = false, className = "" }) {
   const glowId = `s-glow-${uid}`;
   const blurId = `glow-blur-${uid}`;
-  const blurAmount = desktop ? 22 : 9;
-  const glowOuterWidth = desktop ? 52 : 34;
-  const glowInnerWidth = desktop ? 34 : 22;
+  const blurAmount = desktop ? 22 : 6;
+  const glowOuterWidth = desktop ? 52 : 26;
+  const glowInnerWidth = desktop ? 34 : 16;
 
   return (
     <svg
       className={`brand-bg__svg brand-bg__svg--right ${className}`.trim()}
       viewBox="0 0 900 720"
-      preserveAspectRatio={desktop ? "xMaxYMid slice" : "xMidYMid meet"}
+      preserveAspectRatio="xMaxYMid slice"
       xmlns="http://www.w3.org/2000/svg"
     >
       {glow && (
