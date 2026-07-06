@@ -88,8 +88,27 @@ button {
 .section {
   position: relative;
   isolation: isolate;
-  overflow: hidden;
-  padding: 64px 0;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  box-sizing: border-box;
+  min-height: calc(100svh - var(--header-h));
+  min-height: calc(100dvh - var(--header-h));
+  padding: 48px 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.section > .container:not(.contact-grid) {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.container.contact-grid {
+  display: grid;
+  flex: unset;
 }
 
 .section:not(.hero)::before {
@@ -161,53 +180,62 @@ button {
 
 .brand-bg {
   position: absolute;
-  inset: 0;
+  inset: 24px 12px;
   z-index: 0;
   pointer-events: none;
-  overflow: hidden;
+  overflow: visible;
 }
 
 .brand-bg__svg {
   position: absolute;
-  height: 100%;
-  top: 0;
+  overflow: visible;
 }
 
 .brand-bg__svg--left {
   left: 0;
-  width: 42%;
-  opacity: 0.85;
+  top: 50%;
+  width: 38%;
+  max-width: 160px;
+  height: auto;
+  max-height: 72%;
+  transform: translateY(-50%);
+  opacity: 0.35;
 }
 
 .brand-bg__svg--right {
-  right: -8%;
-  width: 72%;
+  left: 50%;
+  right: auto;
+  top: 50%;
+  width: min(76vw, 320px);
+  height: min(52dvh, 380px);
+  max-height: calc(100% - 32px);
+  transform: translate(-50%, -50%);
+  opacity: 0.32;
 }
 
 .brand-bg--hero .brand-bg__svg--left {
-  width: 48%;
-  opacity: 1;
+  width: 38%;
+  opacity: 0.4;
 }
 
 .brand-bg--hero .brand-bg__svg--right {
-  width: 78%;
-  height: 110%;
-  top: -5%;
+  opacity: 0.36;
 }
 
 .brand-bg--left .brand-bg__svg--left {
-  width: 55%;
-  opacity: 1;
+  width: 42%;
+  max-width: 180px;
+  opacity: 0.45;
 }
 
 .brand-bg--both .brand-bg__svg--left {
-  width: 46%;
-  opacity: 0.9;
+  width: 38%;
+  max-width: 160px;
+  opacity: 0.35;
 }
 
 .brand-bg--both .brand-bg__svg--right {
-  width: 62%;
-  opacity: 0.5;
+  opacity: 0.34;
 }
 
 .brand-bg__left-glow {
@@ -270,6 +298,7 @@ button {
   stroke-dasharray: 1200;
   stroke-dashoffset: 1200;
   opacity: 0;
+  display: none;
   animation: drawGlow 3.5s ease forwards, pulseGlow 6s ease-in-out 3.5s infinite;
 }
 
@@ -554,8 +583,6 @@ h3 {
 
 .hero {
   box-sizing: border-box;
-  min-height: calc(100svh - var(--header-h));
-  min-height: calc(100dvh - var(--header-h));
   padding: 28px 0 32px;
   display: flex;
   align-items: center;
@@ -707,17 +734,6 @@ h3 {
   min-height: auto;
   padding: 0;
   border-radius: 0;
-}
-
-.brand-bg--hero .brand-bg__svg--right {
-  right: -22%;
-  width: 95%;
-  opacity: 0.4;
-}
-
-.brand-bg--hero .brand-bg__svg--left {
-  width: 58%;
-  opacity: 0.65;
 }
 
 .hero-stack span {
@@ -2086,12 +2102,76 @@ h3 {
 /* ── Responsive (mobile-first) ── */
 
 @media (min-width: 681px) {
-  .container {
-    width: min(100% - 48px, 1080px);
+  .section {
+    min-height: auto;
+    padding: 88px 0;
+    display: block;
+    overflow: hidden;
   }
 
-  .section {
-    padding: 88px 0;
+  .section > .container:not(.contact-grid) {
+    flex: unset;
+    display: block;
+  }
+
+  .contact-grid {
+    grid-template-columns: 1fr minmax(280px, 340px);
+    gap: 48px;
+    align-items: center;
+  }
+
+  .brand-bg {
+    inset: 0;
+    overflow: hidden;
+  }
+
+  .brand-bg__svg--left {
+    top: 0;
+    width: 42%;
+    max-width: none;
+    height: 100%;
+    max-height: none;
+    transform: none;
+    opacity: 0.85;
+  }
+
+  .brand-bg__svg--right {
+    left: auto;
+    right: -8%;
+    top: 0;
+    width: 72%;
+    height: 100%;
+    max-height: none;
+    transform: none;
+    opacity: 1;
+  }
+
+  .brand-bg--hero .brand-bg__svg--left {
+    width: 48%;
+    opacity: 1;
+  }
+
+  .brand-bg--left .brand-bg__svg--left {
+    width: 55%;
+    opacity: 1;
+  }
+
+  .brand-bg--both .brand-bg__svg--left {
+    width: 46%;
+    opacity: 0.9;
+  }
+
+  .brand-bg--both .brand-bg__svg--right {
+    width: 62%;
+    opacity: 0.5;
+  }
+
+  .brand-bg__glow {
+    display: block;
+  }
+
+  .container {
+    width: min(100% - 48px, 1080px);
   }
 
   .section:not(.hero) .container::before {
@@ -2154,12 +2234,15 @@ h3 {
   .brand-bg--hero .brand-bg__svg--right {
     right: -15%;
     width: 90%;
+    height: 100%;
+    top: 0;
+    transform: none;
     opacity: 0.55;
   }
 
   .brand-bg--hero .brand-bg__svg--left {
-    width: 52%;
-    opacity: 1;
+    width: 48%;
+    opacity: 0.85;
   }
 
   .site-backdrop__left {
@@ -2296,11 +2379,21 @@ h3 {
     width: 78%;
     height: 110%;
     top: -5%;
+    transform: none;
     opacity: 1;
+  }
+
+  .brand-bg--both .brand-bg__svg--right {
+    right: -6%;
+    width: 62%;
+    height: 100%;
+    top: 0;
+    opacity: 0.5;
   }
 
   .brand-bg--hero .brand-bg__svg--left {
     width: 48%;
+    opacity: 1;
   }
 
   .sol-showcase {
@@ -2346,9 +2439,5 @@ h3 {
 
   .method-trail__steps {
     grid-template-columns: repeat(4, minmax(0, 1fr));
-  }
-
-  .contact-grid {
-    grid-template-columns: 1fr 340px;
   }
 }

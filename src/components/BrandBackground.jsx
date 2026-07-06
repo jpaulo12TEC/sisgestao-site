@@ -1,4 +1,4 @@
-import { useId } from "react";
+import { useEffect, useId, useState } from "react";
 
 const S_OUTER =
   "M 780 20 C 560 20 420 90 420 210 C 420 310 540 340 660 360 C 780 380 860 410 860 520 C 860 630 720 680 480 680";
@@ -20,12 +20,27 @@ const LEFT_ARCS = [
 const LEFT_BOTTOM = "M -20 640 C 140 560 280 580 420 660";
 const ARC_BOTTOM = "M 120 680 C 340 560 560 580 880 700";
 
-function LeftAccent({ className = "" }) {
+function useDesktopBrand() {
+  const [desktop, setDesktop] = useState(
+    () => typeof window !== "undefined" && window.matchMedia("(min-width: 981px)").matches,
+  );
+
+  useEffect(() => {
+    const mq = window.matchMedia("(min-width: 981px)");
+    const onChange = () => setDesktop(mq.matches);
+    mq.addEventListener("change", onChange);
+    return () => mq.removeEventListener("change", onChange);
+  }, []);
+
+  return desktop;
+}
+
+function LeftAccent({ className = "", desktop = false }) {
   return (
     <svg
       className={`brand-bg__svg brand-bg__svg--left ${className}`.trim()}
       viewBox="0 0 420 720"
-      preserveAspectRatio="xMinYMid slice"
+      preserveAspectRatio={desktop ? "xMinYMid slice" : "xMinYMid meet"}
       xmlns="http://www.w3.org/2000/svg"
     >
       {LEFT_ARCS.map((d, i) => (
@@ -40,15 +55,15 @@ function LeftAccent({ className = "" }) {
   );
 }
 
-function RightAccent({ glow = false, uid }) {
+function RightAccent({ glow = false, uid, desktop = false }) {
   const glowId = `s-glow-${uid}`;
   const blurId = `glow-blur-${uid}`;
 
   return (
     <svg
       className="brand-bg__svg brand-bg__svg--right"
-      viewBox="0 0 900 720"
-      preserveAspectRatio="xMaxYMid slice"
+      viewBox={desktop ? "0 0 900 720" : "330 0 570 720"}
+      preserveAspectRatio={desktop ? "xMaxYMid slice" : "xMidYMid meet"}
       xmlns="http://www.w3.org/2000/svg"
     >
       {glow && (
@@ -100,27 +115,30 @@ function RightAccent({ glow = false, uid }) {
 
 export default function BrandBackground({ variant = "hero", glow = false }) {
   const uid = useId();
+  const desktop = useDesktopBrand();
   const showLeft = variant === "hero" || variant === "left" || variant === "both";
   const showRight = variant === "hero" || variant === "right" || variant === "both" || glow;
   const showLeftGlow = showLeft && variant !== "right";
 
   return (
     <div className={`brand-bg brand-bg--${variant}`} aria-hidden="true">
-      {showLeft && <LeftAccent />}
-      {showRight && <RightAccent glow={glow} uid={uid} />}
+      {showLeft && <LeftAccent desktop={desktop} />}
+      {showRight && <RightAccent glow={glow} uid={uid} desktop={desktop} />}
       {showLeftGlow && <div className="brand-bg__left-glow" />}
     </div>
   );
 }
 
 export function SiteBackdrop() {
+  const desktop = useDesktopBrand();
+
   return (
     <div className="site-backdrop" aria-hidden="true">
-      <LeftAccent className="site-backdrop__left" />
+      <LeftAccent className="site-backdrop__left" desktop={desktop} />
       <svg
         className="site-backdrop__right"
-        viewBox="0 0 900 720"
-        preserveAspectRatio="xMaxYMid slice"
+        viewBox={desktop ? "0 0 900 720" : "330 0 570 720"}
+        preserveAspectRatio={desktop ? "xMaxYMid slice" : "xMidYMid meet"}
         xmlns="http://www.w3.org/2000/svg"
       >
         <path
