@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import logo from "../Capa = Insta.png";
 import { WHATSAPP_URL } from "./company.js";
 
@@ -16,6 +16,13 @@ export default function Header() {
     setIsOpen(false);
   }
 
+  useEffect(() => {
+    document.body.style.overflow = isOpen ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isOpen]);
+
   return (
     <header className="site-header">
       <nav className="container nav" aria-label="Navegação principal">
@@ -25,19 +32,25 @@ export default function Header() {
         </a>
 
         <button
-          className="menu-button"
+          className={`menu-button${isOpen ? " is-open" : ""}`}
           type="button"
           aria-expanded={isOpen}
           aria-controls="site-menu"
+          aria-label={isOpen ? "Fechar menu" : "Abrir menu"}
           onClick={() => setIsOpen((current) => !current)}
         >
           <span />
           <span />
           <span />
-          <span className="sr-only">Abrir menu</span>
         </button>
 
-        <div className={`nav-links ${isOpen ? "is-open" : ""}`} id="site-menu">
+        <div
+          className={`nav-overlay${isOpen ? " is-open" : ""}`}
+          aria-hidden="true"
+          onClick={closeMenu}
+        />
+
+        <div className={`nav-links${isOpen ? " is-open" : ""}`} id="site-menu">
           {navItems.map((item) => (
             <a key={item.href} href={item.href} onClick={closeMenu}>
               {item.label}
