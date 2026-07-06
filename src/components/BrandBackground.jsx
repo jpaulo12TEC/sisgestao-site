@@ -40,7 +40,7 @@ function LeftAccent({ className = "", desktop = false }) {
     <svg
       className={`brand-bg__svg brand-bg__svg--left ${className}`.trim()}
       viewBox="0 0 420 720"
-      preserveAspectRatio={desktop ? "xMinYMid slice" : "xMinYMid meet"}
+      preserveAspectRatio={desktop ? "xMinYMid slice" : "xMinYMin slice"}
       xmlns="http://www.w3.org/2000/svg"
     >
       {LEFT_ARCS.map((d, i) => (
@@ -62,8 +62,8 @@ function RightAccent({ glow = false, uid, desktop = false, className = "" }) {
   return (
     <svg
       className={`brand-bg__svg brand-bg__svg--right ${className}`.trim()}
-      viewBox={desktop ? "0 0 900 720" : "330 0 570 720"}
-      preserveAspectRatio={desktop ? "xMaxYMid slice" : "xMidYMid meet"}
+      viewBox="0 0 900 720"
+      preserveAspectRatio="xMaxYMid slice"
       xmlns="http://www.w3.org/2000/svg"
     >
       {glow && (
