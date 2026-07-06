@@ -78,7 +78,12 @@ export default function SolutionsShowcase({ items }) {
             className={`sol-showcase__slide${index === active ? " is-active" : ""}`}
             aria-hidden={index !== active}
           >
-            <img src={item.image} alt={item.title} loading="lazy" />
+            <img
+              src={item.image}
+              alt={item.title}
+              loading={index === active ? "eager" : "lazy"}
+              decoding="async"
+            />
           </div>
         ))}
         <div className="sol-showcase__stage-glow" aria-hidden="true" />

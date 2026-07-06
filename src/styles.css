@@ -23,6 +23,7 @@
   --radius-sm: 8px;
   --radius-md: 12px;
   --radius-lg: 16px;
+  --header-h: calc(60px + env(safe-area-inset-top, 0px));
 }
 
 * {
@@ -552,8 +553,10 @@ h3 {
 /* ── Hero ── */
 
 .hero {
-  padding: 48px 0 72px;
-  min-height: auto;
+  box-sizing: border-box;
+  min-height: calc(100svh - var(--header-h));
+  min-height: calc(100dvh - var(--header-h));
+  padding: 28px 0 32px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -561,6 +564,9 @@ h3 {
 
 .hero-inner {
   width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .hero-copy--center {
@@ -579,8 +585,8 @@ h3 {
 
 .hero-copy--center h1 {
   max-width: none;
-  margin-bottom: 24px;
-  font-size: clamp(1.75rem, 8vw, 3rem);
+  margin-bottom: 20px;
+  font-size: clamp(1.625rem, 7.5vw, 2.25rem);
   font-weight: 600;
   line-height: 1.12;
   letter-spacing: -0.04em;
@@ -591,7 +597,7 @@ h3 {
   display: flex;
   align-items: center;
   gap: 10px;
-  margin-bottom: 20px;
+  margin-bottom: 16px;
   color: var(--gray-500);
   font-size: 0.6875rem;
   font-weight: 500;
@@ -645,10 +651,10 @@ h3 {
   display: flex;
   flex-direction: column;
   align-items: stretch;
-  gap: 12px;
-  margin-bottom: 28px;
+  gap: 10px;
+  margin-bottom: 20px;
   width: 100%;
-  max-width: 300px;
+  max-width: 280px;
   margin-inline: auto;
 }
 
@@ -1267,6 +1273,15 @@ h3 {
 
 .sol-showcase__stage {
   order: -1;
+  position: relative;
+  width: 100%;
+  min-height: 220px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-lg);
+  background: #060608;
+  overflow: hidden;
+  aspect-ratio: 16 / 9.5;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
 }
 
 .sol-showcase__list {
@@ -1358,16 +1373,6 @@ h3 {
   to { transform: scaleX(1); }
 }
 
-.sol-showcase__stage {
-  position: relative;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: var(--radius-lg);
-  background: #060608;
-  overflow: hidden;
-  aspect-ratio: 16 / 9.5;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
-}
-
 .sol-showcase__slide {
   position: absolute;
   inset: 0;
@@ -1382,6 +1387,7 @@ h3 {
 .sol-showcase__slide.is-active {
   opacity: 1;
   transform: scale(1);
+  z-index: 1;
 }
 
 .sol-showcase__slide img {
@@ -1400,27 +1406,10 @@ h3 {
     radial-gradient(circle at 85% 110%, rgba(0, 85, 255, 0.1), transparent 45%);
 }
 
-/* Capabilities strip */
+/* Capabilities strip — hidden on mobile */
 
 .capabilities-strip {
-  display: flex;
-  flex-direction: column;
-  gap: 0;
-  border-top: 1px solid rgba(255, 255, 255, 0.06);
-  padding-top: 24px;
-}
-
-.capabilities-strip__item {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  padding: 12px 0;
-  border-top: 1px solid rgba(255, 255, 255, 0.06);
-}
-
-.capabilities-strip__item:first-child {
-  border-top: none;
-  padding-top: 0;
+  display: none;
 }
 
 .capabilities-strip__tag {
@@ -2032,6 +2021,36 @@ h3 {
   line-height: 1.65;
 }
 
+@media (max-width: 680px) and (max-height: 700px) {
+  .hero {
+    padding: 20px 0 24px;
+  }
+
+  .hero-label {
+    margin-bottom: 12px;
+  }
+
+  .hero-copy--center h1 {
+    margin-bottom: 14px;
+    font-size: clamp(1.5rem, 6.5vw, 1.875rem);
+  }
+
+  .hero-actions {
+    margin-bottom: 14px;
+    gap: 8px;
+  }
+
+  .hero-actions .button.primary {
+    padding: 12px 20px;
+    min-height: 44px;
+  }
+
+  .hero-stack {
+    font-size: 0.5625rem;
+    line-height: 1.6;
+  }
+}
+
 /* ── Reduced motion ── */
 
 @media (prefers-reduced-motion: reduce) {
@@ -2082,7 +2101,8 @@ h3 {
 
   .hero {
     padding: 80px 0 96px;
-    min-height: calc(100vh - 60px);
+    min-height: calc(100svh - var(--header-h));
+    min-height: calc(100dvh - var(--header-h));
   }
 
   .hero-label {
@@ -2172,25 +2192,26 @@ h3 {
   }
 
   .capabilities-strip {
+    display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    gap: 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
     padding-top: 28px;
   }
 
   .capabilities-strip__item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
     flex: 1 1 140px;
     padding: 0 20px;
-    border-top: none;
     border-left: 1px solid rgba(255, 255, 255, 0.06);
   }
 
   .capabilities-strip__item:first-child {
     padding-left: 0;
     border-left: none;
-  }
-
-  .contact-grid {
-    gap: 48px;
   }
 
   .solutions-header {
