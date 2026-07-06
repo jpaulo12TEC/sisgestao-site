@@ -191,16 +191,16 @@ button {
 }
 
 .brand-bg__svg--left {
-  left: -6%;
-  top: 0;
-  width: 58%;
-  height: 44%;
-  opacity: 0.55;
+  left: -14%;
+  top: -2%;
+  width: 50%;
+  height: 34%;
+  opacity: 0.4;
 }
 
 .brand-bg__svg--right {
   left: auto;
-  right: -32%;
+  right: -44%;
   top: -3%;
   bottom: auto;
   width: 122%;
@@ -211,7 +211,7 @@ button {
 }
 
 .brand-bg--hero .brand-bg__svg--right {
-  right: -36%;
+  right: -48%;
   top: -5%;
   width: 128%;
   height: 118%;
@@ -220,12 +220,12 @@ button {
 
 .brand-bg--hero .brand-bg__svg--left,
 .brand-bg--both .brand-bg__svg--left {
-  width: 58%;
-  opacity: 0.55;
+  width: 50%;
+  opacity: 0.4;
 }
 
 .brand-bg--both .brand-bg__svg--right {
-  right: -32%;
+  right: -44%;
   top: -3%;
   bottom: auto;
   width: 122%;
@@ -235,8 +235,9 @@ button {
 }
 
 .brand-bg--left .brand-bg__svg--left {
-  width: 58%;
-  opacity: 0.5;
+  width: 48%;
+  height: 32%;
+  opacity: 0.38;
 }
 
 .brand-bg__line--right.brand-bg__line--s-outer {
@@ -297,20 +298,20 @@ button {
 }
 
 .brand-bg__line--left {
-  stroke: rgba(255, 255, 255, 0.16);
-  stroke-width: 1.5;
-  animation: brandLineRevealSoft 5s ease forwards;
+  stroke: rgba(255, 255, 255, 0.12);
+  stroke-width: 1.35;
+  animation: brandLineRevealSoft 5.5s ease forwards;
 }
 
 .brand-bg__line--left-1 { animation-delay: 0.1s; }
-.brand-bg__line--left-2 { animation-delay: 0.15s; stroke: rgba(255, 255, 255, 0.1); }
+.brand-bg__line--left-2 { animation-delay: 0.15s; stroke: rgba(255, 255, 255, 0.07); }
 .brand-bg__line--left-3 { animation-delay: 0.35s; }
-.brand-bg__line--left-4 { animation-delay: 0.4s; stroke: rgba(255, 255, 255, 0.1); }
+.brand-bg__line--left-4 { animation-delay: 0.4s; stroke: rgba(255, 255, 255, 0.07); }
 .brand-bg__line--left-5 { animation-delay: 0.6s; }
-.brand-bg__line--left-6 { animation-delay: 0.65s; stroke: rgba(255, 255, 255, 0.1); }
+.brand-bg__line--left-6 { animation-delay: 0.65s; stroke: rgba(255, 255, 255, 0.07); }
 .brand-bg__line--left-7 { animation-delay: 0.85s; }
-.brand-bg__line--left-8 { animation-delay: 0.9s; stroke: rgba(255, 255, 255, 0.08); }
-.brand-bg__line--left-bottom { animation-delay: 1.1s; stroke: rgba(255, 255, 255, 0.1); }
+.brand-bg__line--left-8 { animation-delay: 0.9s; stroke: rgba(255, 255, 255, 0.06); }
+.brand-bg__line--left-bottom { animation-delay: 1.1s; stroke: rgba(255, 255, 255, 0.08); }
 
 .brand-bg__line--right.brand-bg__line--bottom { animation-delay: 0.7s; }
 
@@ -338,10 +339,10 @@ button {
 @keyframes brandLineRevealSoft {
   0% {
     opacity: 0;
-    stroke-dashoffset: 24;
+    stroke-dashoffset: 28;
   }
   100% {
-    opacity: 0.42;
+    opacity: 0.28;
     stroke-dashoffset: 0;
   }
 }
@@ -380,14 +381,14 @@ button {
 
 .site-backdrop__left {
   position: absolute;
-  left: -6%;
-  top: 0;
-  width: 58%;
-  height: 40%;
+  left: -14%;
+  top: -2%;
+  width: 48%;
+  height: 30%;
   max-width: none;
   max-height: none;
   transform: none;
-  opacity: 0.32;
+  opacity: 0.2;
 }
 
 .site-backdrop__left .brand-bg__line {
