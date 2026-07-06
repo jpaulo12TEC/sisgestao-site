@@ -191,63 +191,73 @@ button {
 }
 
 .brand-bg__svg--left {
-  left: -4%;
+  left: -2%;
   top: 0;
-  width: 80%;
-  height: 62%;
-  opacity: 0.95;
+  width: 76%;
+  height: 56%;
+  opacity: 1;
 }
 
 .brand-bg__svg--right {
   left: auto;
-  right: -24%;
-  top: 50%;
-  width: 100%;
-  height: 108%;
-  transform: translateY(-50%);
-  opacity: 0.6;
+  right: auto;
+  left: 50%;
+  top: auto;
+  bottom: 6%;
+  width: min(88vw, 380px);
+  height: auto;
+  max-height: 46vh;
+  transform: translateX(-50%);
+  opacity: 0.92;
 }
 
 .brand-bg--hero .brand-bg__svg--right {
-  opacity: 0.68;
+  bottom: 4%;
+  width: min(86vw, 360px);
+  max-height: 44vh;
+  opacity: 1;
 }
 
 .brand-bg--hero .brand-bg__svg--left,
 .brand-bg--both .brand-bg__svg--left {
-  width: 80%;
+  width: 76%;
+  opacity: 1;
+}
+
+.brand-bg--both .brand-bg__svg--right {
+  bottom: 8%;
+  width: min(82vw, 340px);
+  max-height: 40vh;
   opacity: 0.95;
 }
 
 .brand-bg--left .brand-bg__svg--left {
-  width: 80%;
-  opacity: 0.9;
-}
-
-.brand-bg--both .brand-bg__svg--right {
-  opacity: 0.62;
+  width: 76%;
+  opacity: 0.95;
 }
 
 .brand-bg__line--right.brand-bg__line--s-outer {
   animation-delay: 0.45s;
-  stroke-width: 2.5;
-  stroke: rgba(255, 255, 255, 0.34);
+  stroke-width: 2;
+  stroke: rgba(255, 255, 255, 0.4);
 }
 
 .brand-bg__line--right.brand-bg__line--s-inner {
   animation-delay: 0.9s;
-  stroke: rgba(255, 255, 255, 0.22);
+  stroke: rgba(255, 255, 255, 0.26);
 }
 
 .brand-bg__left-glow {
   position: absolute;
   left: -80px;
   top: 18%;
-  width: 280px;
-  height: 280px;
+  width: 220px;
+  height: 220px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(0, 85, 255, 0.14) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(0, 85, 255, 0.08) 0%, transparent 70%);
   animation: driftGlow 12s ease-in-out infinite;
   pointer-events: none;
+  opacity: 0.5;
 }
 
 .brand-bg--left .brand-bg__left-glow {
@@ -287,7 +297,7 @@ button {
 }
 
 .brand-bg__line--left {
-  stroke: rgba(255, 255, 255, 0.3);
+  stroke: rgba(255, 255, 255, 0.36);
   stroke-width: 2;
 }
 
@@ -326,11 +336,22 @@ button {
 
 @keyframes drawGlow {
   0% { stroke-dashoffset: 1200; opacity: 0; }
+  60% { opacity: 0.5; }
+  100% { stroke-dashoffset: 0; opacity: 0.38; }
+}
+
+@keyframes pulseGlow {
+  0%, 100% { opacity: 0.34; filter: brightness(1); }
+  50% { opacity: 0.52; filter: brightness(1.08); }
+}
+
+@keyframes drawGlowDesktop {
+  0% { stroke-dashoffset: 1200; opacity: 0; }
   60% { opacity: 0.7; }
   100% { stroke-dashoffset: 0; opacity: 0.55; }
 }
 
-@keyframes pulseGlow {
+@keyframes pulseGlowDesktop {
   0%, 100% { opacity: 0.5; filter: brightness(1); }
   50% { opacity: 0.75; filter: brightness(1.2); }
 }
@@ -347,19 +368,19 @@ button {
 
 .site-backdrop__left {
   position: absolute;
-  left: -4%;
+  left: -2%;
   top: 0;
-  width: 80%;
-  height: 55%;
+  width: 76%;
+  height: 52%;
   max-width: none;
   max-height: none;
   transform: none;
-  opacity: 0.6;
+  opacity: 0.85;
 }
 
 .site-backdrop__left .brand-bg__line {
-  animation-duration: 6s;
-  stroke-width: 1.75;
+  animation-duration: 5s;
+  stroke-width: 1.85;
 }
 
 .site-backdrop__right {
@@ -2255,6 +2276,7 @@ h3 {
     left: auto;
     right: -8%;
     top: 0;
+    bottom: auto;
     width: 72%;
     height: 100%;
     max-height: none;
@@ -2278,8 +2300,21 @@ h3 {
   }
 
   .brand-bg--both .brand-bg__svg--right {
+    bottom: auto;
     width: 62%;
+    height: 100%;
     opacity: 0.5;
+  }
+
+  .brand-bg__left-glow {
+    width: 280px;
+    height: 280px;
+    opacity: 1;
+    background: radial-gradient(circle, rgba(0, 85, 255, 0.14) 0%, transparent 70%);
+  }
+
+  .brand-bg__glow {
+    animation: drawGlowDesktop 3.5s ease forwards, pulseGlowDesktop 6s ease-in-out 3.5s infinite;
   }
 
   .container {
@@ -2348,6 +2383,7 @@ h3 {
     width: 90%;
     height: 100%;
     top: 0;
+    bottom: auto;
     transform: none;
     opacity: 0.55;
   }

@@ -68,12 +68,16 @@ export default function SolutionsShowcase({ items }) {
   useEffect(() => {
     if (window.matchMedia("(min-width: 681px)").matches) return;
 
+    const list = listRef.current;
     const item = itemRefs.current[active];
-    item?.scrollIntoView({
-      inline: "center",
-      block: "nearest",
-      behavior: "smooth",
-    });
+    if (!list || !item) return;
+
+    const listRect = list.getBoundingClientRect();
+    const itemRect = item.getBoundingClientRect();
+    const targetLeft =
+      list.scrollLeft + (itemRect.left - listRect.left) - (listRect.width - itemRect.width) / 2;
+
+    list.scrollTo({ left: Math.max(0, targetLeft), behavior: "smooth" });
   }, [active]);
 
   useEffect(() => {

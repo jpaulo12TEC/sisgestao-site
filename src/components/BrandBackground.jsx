@@ -58,12 +58,15 @@ function LeftAccent({ className = "", desktop = false }) {
 function RightAccent({ glow = false, uid, desktop = false, className = "" }) {
   const glowId = `s-glow-${uid}`;
   const blurId = `glow-blur-${uid}`;
+  const blurAmount = desktop ? 22 : 9;
+  const glowOuterWidth = desktop ? 52 : 34;
+  const glowInnerWidth = desktop ? 34 : 22;
 
   return (
     <svg
       className={`brand-bg__svg brand-bg__svg--right ${className}`.trim()}
       viewBox="0 0 900 720"
-      preserveAspectRatio="xMaxYMid slice"
+      preserveAspectRatio={desktop ? "xMaxYMid slice" : "xMidYMid meet"}
       xmlns="http://www.w3.org/2000/svg"
     >
       {glow && (
@@ -74,7 +77,7 @@ function RightAccent({ glow = false, uid, desktop = false, className = "" }) {
             <stop offset="100%" stopColor="#003399" />
           </linearGradient>
           <filter id={blurId} x="-60%" y="-60%" width="220%" height="220%">
-            <feGaussianBlur stdDeviation="22" result="blur" />
+            <feGaussianBlur stdDeviation={blurAmount} result="blur" />
             <feMerge>
               <feMergeNode in="blur" />
               <feMergeNode in="SourceGraphic" />
@@ -94,7 +97,7 @@ function RightAccent({ glow = false, uid, desktop = false, className = "" }) {
             d={S_OUTER}
             fill="none"
             stroke={`url(#${glowId})`}
-            strokeWidth="52"
+            strokeWidth={glowOuterWidth}
             strokeLinecap="round"
             filter={`url(#${blurId})`}
           />
@@ -103,7 +106,7 @@ function RightAccent({ glow = false, uid, desktop = false, className = "" }) {
             d={S_INNER}
             fill="none"
             stroke={`url(#${glowId})`}
-            strokeWidth="34"
+            strokeWidth={glowInnerWidth}
             strokeLinecap="round"
             filter={`url(#${blurId})`}
           />
@@ -134,12 +137,11 @@ export default function BrandBackground({ variant = "hero", glow = false, hideRi
 
 export function SiteBackdrop() {
   const desktop = useDesktopBrand();
-  const uid = useId();
 
   return (
     <div className="site-backdrop" aria-hidden="true">
       <LeftAccent className="site-backdrop__left" desktop={desktop} />
-      {desktop ? (
+      {desktop && (
         <svg
           className="site-backdrop__right site-backdrop__right--ghost"
           viewBox="0 0 900 720"
@@ -163,13 +165,6 @@ export function SiteBackdrop() {
             strokeDasharray="2 10"
           />
         </svg>
-      ) : (
-        <RightAccent
-          glow
-          uid={uid}
-          desktop={false}
-          className="site-backdrop__right site-backdrop__right--live"
-        />
       )}
     </div>
   );

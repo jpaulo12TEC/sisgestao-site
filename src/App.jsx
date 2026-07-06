@@ -265,6 +265,11 @@ function Contact() {
 }
 
 function HomePage() {
+  useEffect(() => {
+    if (window.location.hash) return;
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <>
       <SiteBackdrop />
