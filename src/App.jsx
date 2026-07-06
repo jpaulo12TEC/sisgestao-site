@@ -124,7 +124,7 @@ function Hero() {
 function Solutions() {
   return (
     <section className="section section-solutions" id="solucoes">
-      <BrandBackground variant="both" glow />
+      <BrandBackground variant="both" glow hideRightOnDesktop />
       <div className="container">
         <Reveal className="solutions-header">
           <div className="hero-label">
@@ -198,7 +198,7 @@ function Differentials() {
 function Method() {
   return (
     <section className="section section-dark section-alt" id="metodo">
-      <BrandBackground variant="both" glow />
+      <BrandBackground variant="both" glow hideRightOnDesktop />
       <div className="container">
         <Reveal className="method-header">
           <div className="hero-label">

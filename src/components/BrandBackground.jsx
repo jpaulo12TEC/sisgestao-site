@@ -113,7 +113,7 @@ function RightAccent({ glow = false, uid, desktop = false, className = "" }) {
   );
 }
 
-export default function BrandBackground({ variant = "hero", glow = false }) {
+export default function BrandBackground({ variant = "hero", glow = false, hideRightOnDesktop = false }) {
   const uid = useId();
   const desktop = useDesktopBrand();
   const showLeft = variant === "hero" || variant === "left" || variant === "both";
@@ -121,7 +121,10 @@ export default function BrandBackground({ variant = "hero", glow = false }) {
   const showLeftGlow = showLeft && variant !== "right";
 
   return (
-    <div className={`brand-bg brand-bg--${variant}`} aria-hidden="true">
+    <div
+      className={`brand-bg brand-bg--${variant}${hideRightOnDesktop ? " brand-bg--no-s-desktop" : ""}`}
+      aria-hidden="true"
+    >
       {showLeft && <LeftAccent desktop={desktop} />}
       {showRight && <RightAccent glow={glow} uid={uid} desktop={desktop} />}
       {showLeftGlow && <div className="brand-bg__left-glow" />}

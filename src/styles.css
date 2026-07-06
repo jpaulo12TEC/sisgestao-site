@@ -2463,6 +2463,11 @@ h3 {
 }
 
 @media (min-width: 981px) {
+  .brand-bg--no-s-desktop .brand-bg__svg--right,
+  .brand-bg--no-s-desktop .brand-bg__glow {
+    display: none;
+  }
+
   .menu-button,
   .nav-overlay {
     display: none;
