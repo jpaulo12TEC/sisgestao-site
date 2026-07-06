@@ -247,12 +247,14 @@ button {
   animation-name: brandLineRevealSoft;
   stroke-width: 2;
   stroke: rgba(255, 255, 255, 0.22);
+  vector-effect: non-scaling-stroke;
 }
 
 .brand-bg__line--right.brand-bg__line--s-inner {
   animation-delay: 0.9s;
   animation-name: brandLineRevealSoft;
   stroke: rgba(255, 255, 255, 0.14);
+  vector-effect: non-scaling-stroke;
 }
 
 .brand-bg__line--right.brand-bg__line--bottom {
@@ -282,10 +284,11 @@ button {
   stroke: var(--line-dot);
   stroke-width: 1.5;
   stroke-linecap: round;
-  stroke-dasharray: 2 8;
+  stroke-dasharray: 3 7;
   stroke-dashoffset: 0;
   opacity: 0;
   animation: brandLineReveal 4.5s ease forwards;
+  vector-effect: non-scaling-stroke;
 }
 
 @keyframes brandLineReveal {
@@ -412,22 +415,23 @@ button {
 }
 
 .site-backdrop__right--mobile {
-  right: -18%;
-  top: 8%;
-  width: 72%;
-  height: 55%;
+  right: -8%;
+  top: 4%;
+  width: 62%;
+  height: 52%;
   transform: none;
-  opacity: 0.45;
+  opacity: 0.55;
 }
 
 .site-backdrop__right--mobile .site-backdrop__s {
-  stroke: rgba(255, 255, 255, 0.14);
+  stroke: rgba(255, 255, 255, 0.22);
   stroke-width: 2;
-  stroke-dasharray: 2 8;
+  stroke-dasharray: 3 7;
+  vector-effect: non-scaling-stroke;
 }
 
 .site-backdrop__right--mobile .site-backdrop__s:last-child {
-  stroke: rgba(255, 255, 255, 0.1);
+  stroke: rgba(255, 255, 255, 0.16);
   stroke-width: 1.5;
 }
 
@@ -2235,69 +2239,84 @@ h3 {
 
 @media (max-width: 680px) {
   .brand-bg--hero .brand-bg__svg--right {
-    right: -6%;
+    right: -10%;
     top: 0;
-    width: 90%;
+    width: 68%;
     height: 100%;
-    transform: translateX(18%);
-    opacity: 0.62;
+    transform: none;
+    opacity: 0.7;
   }
 
   .brand-bg__svg--right {
-    transform: translateX(20%);
-    opacity: 0.55;
+    right: -8%;
+    width: 65%;
+    height: 100%;
+    transform: none;
+    opacity: 0.6;
   }
 
   .brand-bg__line--right.brand-bg__line--s-outer {
     animation-name: brandLineReveal;
-    stroke: rgba(255, 255, 255, 0.32);
-    stroke-width: 2;
+    stroke: rgba(255, 255, 255, 0.42);
+    stroke-width: 2.5;
+    stroke-dasharray: 3 7;
   }
 
   .brand-bg__line--right.brand-bg__line--s-inner {
     animation-name: brandLineReveal;
-    stroke: rgba(255, 255, 255, 0.2);
+    stroke: rgba(255, 255, 255, 0.28);
+    stroke-width: 2;
+    stroke-dasharray: 3 7;
   }
 
   .brand-bg__line {
-    stroke-dasharray: 2 6;
+    stroke-dasharray: 3 7;
   }
 
   .brand-bg__svg--left,
   .brand-bg--hero .brand-bg__svg--left,
   .brand-bg--left .brand-bg__svg--left {
-    left: -10%;
-    width: 62%;
-    height: 44%;
-    opacity: 0.55;
+    left: 0;
+    top: 0;
+    width: 58%;
+    height: 42%;
+    opacity: 0.72;
   }
 
   .brand-bg__line--left {
     animation-name: brandLineReveal;
-    stroke: rgba(255, 255, 255, 0.18);
-    stroke-width: 1.5;
+    stroke: rgba(255, 255, 255, 0.28);
+    stroke-width: 1.75;
+    stroke-dasharray: 3 7;
   }
 
   .brand-bg__line--left-2,
   .brand-bg__line--left-4,
   .brand-bg__line--left-6 {
-    stroke: rgba(255, 255, 255, 0.12);
+    stroke: rgba(255, 255, 255, 0.18);
   }
 
   .brand-bg__line--left-8 {
-    stroke: rgba(255, 255, 255, 0.1);
+    stroke: rgba(255, 255, 255, 0.14);
+  }
+
+  .brand-bg__line--left-bottom {
+    stroke: rgba(255, 255, 255, 0.2);
   }
 
   .site-backdrop__left {
-    left: -12%;
-    width: 58%;
-    height: 38%;
-    opacity: 0.38;
+    left: 0;
+    top: 0;
+    width: 56%;
+    height: 40%;
+    opacity: 0.55;
   }
 
   .site-backdrop__left .brand-bg__line {
     animation-name: brandLineReveal;
-    stroke: rgba(255, 255, 255, 0.16);
+    stroke: rgba(255, 255, 255, 0.24);
+    stroke-width: 1.75;
+    stroke-dasharray: 3 7;
   }
 
   .section-solutions {

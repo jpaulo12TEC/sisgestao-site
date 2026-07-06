@@ -20,6 +20,8 @@ const LEFT_ARCS = [
 const LEFT_BOTTOM = "M -20 640 C 140 560 280 580 420 660";
 const ARC_BOTTOM = "M 120 680 C 340 560 560 580 880 700";
 
+const LEFT_VIEWBOX = "-80 0 500 720";
+
 function useDesktopBrand() {
   const [desktop, setDesktop] = useState(
     () => typeof window !== "undefined" && window.matchMedia("(min-width: 981px)").matches,
@@ -35,12 +37,27 @@ function useDesktopBrand() {
   return desktop;
 }
 
-function LeftAccent({ className = "", desktop = false }) {
+function useMobileBrand() {
+  const [mobile, setMobile] = useState(
+    () => typeof window !== "undefined" && window.matchMedia("(max-width: 680px)").matches,
+  );
+
+  useEffect(() => {
+    const mq = window.matchMedia("(max-width: 680px)");
+    const onChange = () => setMobile(mq.matches);
+    mq.addEventListener("change", onChange);
+    return () => mq.removeEventListener("change", onChange);
+  }, []);
+
+  return mobile;
+}
+
+function LeftAccent({ className = "", desktop = false, mobile = false }) {
   return (
     <svg
       className={`brand-bg__svg brand-bg__svg--left ${className}`.trim()}
-      viewBox="0 0 420 720"
-      preserveAspectRatio={desktop ? "xMinYMid slice" : "xMinYMin slice"}
+      viewBox={LEFT_VIEWBOX}
+      preserveAspectRatio={desktop ? "xMinYMid slice" : mobile ? "xMinYMid meet" : "xMinYMin meet"}
       xmlns="http://www.w3.org/2000/svg"
     >
       {LEFT_ARCS.map((d, i) => (
@@ -55,7 +72,7 @@ function LeftAccent({ className = "", desktop = false }) {
   );
 }
 
-function RightAccent({ glow = false, uid, desktop = false, className = "" }) {
+function RightAccent({ glow = false, uid, desktop = false, mobile = false, className = "" }) {
   const glowId = `s-glow-${uid}`;
   const blurId = `glow-blur-${uid}`;
   const blurAmount = desktop ? 22 : 6;
@@ -66,7 +83,7 @@ function RightAccent({ glow = false, uid, desktop = false, className = "" }) {
     <svg
       className={`brand-bg__svg brand-bg__svg--right ${className}`.trim()}
       viewBox="0 0 900 720"
-      preserveAspectRatio="xMaxYMid slice"
+      preserveAspectRatio={desktop ? "xMaxYMid slice" : mobile ? "xMaxYMid meet" : "xMaxYMid slice"}
       xmlns="http://www.w3.org/2000/svg"
     >
       {glow && (
@@ -119,6 +136,7 @@ function RightAccent({ glow = false, uid, desktop = false, className = "" }) {
 export default function BrandBackground({ variant = "hero", glow = false, hideRightOnDesktop = false }) {
   const uid = useId();
   const desktop = useDesktopBrand();
+  const mobile = useMobileBrand();
   const showLeft = variant === "hero" || variant === "left" || variant === "both";
   const showRight = variant === "hero" || variant === "right" || variant === "both" || glow;
   const showLeftGlow = showLeft && variant !== "right";
@@ -128,8 +146,8 @@ export default function BrandBackground({ variant = "hero", glow = false, hideRi
       className={`brand-bg brand-bg--${variant}${hideRightOnDesktop ? " brand-bg--no-s-desktop" : ""}`}
       aria-hidden="true"
     >
-      {showLeft && <LeftAccent desktop={desktop} />}
-      {showRight && <RightAccent glow={glow} uid={uid} desktop={desktop} />}
+      {showLeft && <LeftAccent desktop={desktop} mobile={mobile} />}
+      {showRight && <RightAccent glow={glow} uid={uid} desktop={desktop} mobile={mobile} />}
       {showLeftGlow && <div className="brand-bg__left-glow" />}
     </div>
   );
@@ -137,14 +155,15 @@ export default function BrandBackground({ variant = "hero", glow = false, hideRi
 
 export function SiteBackdrop() {
   const desktop = useDesktopBrand();
+  const mobile = useMobileBrand();
 
   return (
     <div className="site-backdrop" aria-hidden="true">
-      <LeftAccent className="site-backdrop__left" desktop={desktop} />
+      <LeftAccent className="site-backdrop__left" desktop={desktop} mobile={mobile} />
       <svg
         className={`site-backdrop__right site-backdrop__right--ghost${desktop ? "" : " site-backdrop__right--mobile"}`}
         viewBox="0 0 900 720"
-        preserveAspectRatio="xMaxYMid slice"
+        preserveAspectRatio={mobile ? "xMaxYMid meet" : "xMaxYMid slice"}
         xmlns="http://www.w3.org/2000/svg"
       >
         <path
