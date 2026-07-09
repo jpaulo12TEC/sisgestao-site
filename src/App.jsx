@@ -5,7 +5,7 @@ import Footer from "./Footer.jsx";
 import PrivacyPage from "./PrivacyPage.jsx";
 import TermsPage from "./TermsPage.jsx";
 import BrandBackground, { SiteBackdrop } from "./components/BrandBackground.jsx";
-import MobileBrand from "./components/MobileBrand.jsx";
+import MobileFlowVisual from "./components/MobileFlowVisual.jsx";
 import HeroRotatingText from "./components/HeroRotatingText.jsx";
 import { Reveal } from "./hooks/useReveal.jsx";
 
@@ -89,7 +89,7 @@ function Hero() {
   return (
     <section className="hero section section-dark" id="topo">
       <BrandBackground variant="hero" glow />
-      <MobileBrand variant="hero" />
+      <MobileFlowVisual variant="hero" />
       <div className="container hero-inner">
         <Reveal className="hero-copy hero-copy--center">
           <div className="hero-label hero-label--center">
@@ -127,7 +127,7 @@ function Solutions() {
   return (
     <section className="section section-solutions" id="solucoes">
       <BrandBackground variant="left" />
-      <MobileBrand variant="flow" section={0} />
+      <MobileFlowVisual variant="section" section={0} />
       <div className="container">
         <Reveal className="solutions-header">
           <div className="hero-label">
@@ -157,7 +157,7 @@ function Differentials() {
   return (
     <section className="section section-dark" id="diferenciais">
       <BrandBackground variant="hero" glow />
-      <MobileBrand variant="flow" section={1} />
+      <MobileFlowVisual variant="section" section={1} />
       <div className="container">
         <Reveal className="diff-header">
           <div className="hero-label">
@@ -203,7 +203,7 @@ function Method() {
   return (
     <section className="section section-dark section-alt" id="metodo">
       <BrandBackground variant="left" />
-      <MobileBrand variant="flow" section={2} />
+      <MobileFlowVisual variant="section" section={2} />
       <div className="container">
         <Reveal className="method-header">
           <div className="hero-label">
@@ -229,7 +229,7 @@ function Contact() {
   return (
     <section className="section section-dark section-alt" id="contato">
       <BrandBackground variant="left" />
-      <MobileBrand variant="flow" section={3} />
+      <MobileFlowVisual variant="section" section={3} />
       <div className="container contact-grid">
         <Reveal>
           <div className="hero-label">

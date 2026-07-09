@@ -176,13 +176,13 @@ button {
   color: var(--white);
 }
 
-/* ── Mobile brand (celular only) ── */
+/* ── Mobile flow visual (celular only) ── */
 
-.mobile-brand {
+.mobile-flow {
   display: none;
 }
 
-.mobile-brand__svg {
+.mobile-flow__svg {
   position: absolute;
   inset: 0;
   width: 100%;
@@ -190,33 +190,35 @@ button {
   pointer-events: none;
 }
 
-.mobile-brand__flow {
-  fill: none;
-  stroke-linecap: round;
-  stroke-dasharray: 1.5 13;
-  vector-effect: non-scaling-stroke;
+.mobile-flow__glow {
   opacity: 0;
-  animation: mobileFlowReveal 4.8s ease forwards;
+  animation: mobileFlowGlowIn 1.8s ease forwards, mobileFlowPulse 10s ease-in-out 1.8s infinite;
 }
 
-.mobile-brand__s {
-  fill: none;
-  stroke-linecap: round;
-  stroke-dasharray: 1.5 13;
-  vector-effect: non-scaling-stroke;
+.mobile-flow__ribbon {
   opacity: 0;
-  animation: mobileFlowReveal 5.2s ease forwards;
+  animation: mobileRibbonIn 1.4s ease forwards;
 }
 
-@keyframes mobileFlowReveal {
-  0% {
+@keyframes mobileFlowGlowIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes mobileRibbonIn {
+  from {
     opacity: 0;
-    stroke-dashoffset: 18;
+    transform: translateY(10px);
   }
-  100% {
+  to {
     opacity: 1;
-    stroke-dashoffset: 0;
+    transform: translateY(0);
   }
+}
+
+@keyframes mobileFlowPulse {
+  0%, 100% { opacity: 0.85; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.03); }
 }
 
 /* ── Brand background (S identity) ── */
@@ -2276,7 +2278,7 @@ h3 {
     display: none;
   }
 
-  .mobile-brand {
+  .mobile-flow {
     display: block;
     position: absolute;
     inset: 0;
@@ -2285,43 +2287,21 @@ h3 {
     overflow: hidden;
   }
 
-  .mobile-brand--hero .mobile-brand__flow--0 {
-    stroke: rgba(255, 255, 255, 0.13);
-    stroke-width: 1.15;
+  .mobile-flow--hero .mobile-flow__ribbon--0 {
+    opacity: 0.55;
   }
 
-  .mobile-brand--hero .mobile-brand__flow--1 {
-    stroke: rgba(255, 255, 255, 0.08);
-    stroke-width: 1;
+  .mobile-flow--hero .mobile-flow__ribbon--1 {
+    opacity: 0.38;
   }
 
-  .mobile-brand--hero .mobile-brand__s--outer {
-    stroke: rgba(255, 255, 255, 0.18);
-    stroke-width: 1.5;
-    animation-delay: 0.5s;
+  .mobile-flow--section {
+    height: 42%;
+    max-height: 260px;
   }
 
-  .mobile-brand--hero .mobile-brand__s--inner {
-    stroke: rgba(255, 255, 255, 0.1);
-    stroke-width: 1.1;
-    animation-delay: 0.75s;
-  }
-
-  .mobile-brand--flow {
-    height: 32%;
-    max-height: 180px;
-  }
-
-  .mobile-brand--flow .mobile-brand__flow--0 {
-    stroke: rgba(255, 255, 255, 0.1);
-    stroke-width: 1;
-    stroke-dasharray: 1.5 14;
-  }
-
-  .mobile-brand--flow .mobile-brand__flow--1 {
-    stroke: rgba(255, 255, 255, 0.06);
-    stroke-width: 0.9;
-    stroke-dasharray: 1.5 15;
+  .mobile-flow--section .mobile-flow__ribbon {
+    opacity: 0.42;
   }
 
   .site-backdrop {
@@ -2643,8 +2623,8 @@ h3 {
   .brand-bg__glow,
   .brand-bg__left-glow,
   .site-backdrop__s,
-  .mobile-brand__flow,
-  .mobile-brand__s,
+  .mobile-flow__ribbon,
+  .mobile-flow__glow,
   .software-showcase,
   .app-chart__bars span,
   .app-phone,
