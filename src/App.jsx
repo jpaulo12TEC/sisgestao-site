@@ -157,7 +157,6 @@ function Differentials() {
   return (
     <section className="section section-dark" id="diferenciais">
       <BrandBackground variant="hero" glow />
-      <MobileFlowVisual variant="section" section={1} />
       <div className="container">
         <Reveal className="diff-header">
           <div className="hero-label">
@@ -203,7 +202,6 @@ function Method() {
   return (
     <section className="section section-dark section-alt" id="metodo">
       <BrandBackground variant="left" />
-      <MobileFlowVisual variant="section" section={2} />
       <div className="container">
         <Reveal className="method-header">
           <div className="hero-label">
