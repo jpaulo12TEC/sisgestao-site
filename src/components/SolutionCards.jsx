@@ -133,6 +133,14 @@ export default function SolutionsShowcase({ items }) {
       <div
         className={`sol-showcase__tabs${scrollEdges.start ? " is-at-start" : ""}${scrollEdges.end ? " is-at-end" : ""}`}
       >
+        <button
+          type="button"
+          className="sol-showcase__nav-btn sol-showcase__nav-btn--prev"
+          onClick={goPrev}
+          aria-label="Solução anterior"
+        >
+          <ChevronIcon direction="left" />
+        </button>
         <div
           ref={listRef}
           className="sol-showcase__list"
@@ -172,6 +180,14 @@ export default function SolutionsShowcase({ items }) {
             );
           })}
         </div>
+        <button
+          type="button"
+          className="sol-showcase__nav-btn sol-showcase__nav-btn--next"
+          onClick={goNext}
+          aria-label="Próxima solução"
+        >
+          <ChevronIcon direction="right" />
+        </button>
         <span className="sol-showcase__fade sol-showcase__fade--left" aria-hidden="true" />
         <span className="sol-showcase__fade sol-showcase__fade--right" aria-hidden="true" />
         <span className="sol-showcase__count" aria-hidden="true">
@@ -207,38 +223,13 @@ export default function SolutionsShowcase({ items }) {
         <div className="sol-showcase__stage-glow" aria-hidden="true" />
       </div>
 
-      <div className="sol-showcase__carousel-nav">
-        <button
-          type="button"
-          className="sol-showcase__nav-btn"
-          onClick={goPrev}
-          aria-label="Solução anterior"
-        >
-          <ChevronIcon direction="left" />
-        </button>
-
-        <div className="sol-showcase__dots" role="tablist" aria-label="Navegar soluções">
-          {items.map((item, index) => (
-            <button
-              key={item.title}
-              type="button"
-              role="tab"
-              aria-selected={index === active}
-              aria-label={item.title}
-              className={`sol-showcase__dot${index === active ? " is-active" : ""}`}
-              onClick={() => setActive(index)}
-            />
-          ))}
-        </div>
-
-        <button
-          type="button"
-          className="sol-showcase__nav-btn"
-          onClick={goNext}
-          aria-label="Próxima solução"
-        >
-          <ChevronIcon direction="right" />
-        </button>
+      <div className="sol-showcase__dots" aria-hidden="true">
+        {items.map((item, index) => (
+          <span
+            key={item.title}
+            className={`sol-showcase__dot${index === active ? " is-active" : ""}`}
+          />
+        ))}
       </div>
     </div>
   );
