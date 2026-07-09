@@ -2,6 +2,29 @@ import { useCallback, useEffect, useRef, useState } from "react";
 
 const ROTATE_MS = 4000;
 
+const MOBILE_LABELS = {
+  "Sistema de Gestão": "Gestão",
+  "Sites Institucionais": "Sites",
+  "E-commerce": "E-commerce",
+  "Aplicativos": "Apps",
+  "Gestão pública e licitações": "Gov/Licitações",
+};
+
+function useMobileShowcase() {
+  const [mobile, setMobile] = useState(
+    () => typeof window !== "undefined" && window.matchMedia("(max-width: 680px)").matches,
+  );
+
+  useEffect(() => {
+    const mq = window.matchMedia("(max-width: 680px)");
+    const onChange = () => setMobile(mq.matches);
+    mq.addEventListener("change", onChange);
+    return () => mq.removeEventListener("change", onChange);
+  }, []);
+
+  return mobile;
+}
+
 function ChevronIcon({ direction = "left" }) {
   return (
     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
@@ -17,6 +40,7 @@ function ChevronIcon({ direction = "left" }) {
 }
 
 export default function SolutionsShowcase({ items }) {
+  const mobile = useMobileShowcase();
   const [active, setActive] = useState(0);
   const [paused, setPaused] = useState(false);
   const containerRef = useRef(null);
@@ -89,16 +113,13 @@ export default function SolutionsShowcase({ items }) {
   }, [items.length, updateScrollEdges]);
 
   useEffect(() => {
-    if (window.matchMedia("(min-width: 981px)").matches) return;
+    if (!mobile) return;
 
-    const list = listRef.current;
     const item = itemRefs.current[active];
-    if (!list || !item) return;
+    if (!item) return;
 
-    const targetLeft = item.offsetLeft - (list.clientWidth - item.offsetWidth) / 2;
-
-    list.scrollTo({ left: Math.max(0, targetLeft), behavior: "smooth" });
-  }, [active]);
+    item.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
+  }, [active, mobile]);
 
   useEffect(() => {
     updateScrollEdges();
@@ -123,13 +144,54 @@ export default function SolutionsShowcase({ items }) {
     setPaused(false);
   };
 
+  const activeItem = items[active];
+
   return (
     <div
       ref={containerRef}
-      className="sol-showcase"
+      className={`sol-showcase${mobile ? " sol-showcase--mobile" : ""}`}
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
     >
+      <div
+        className="sol-showcase__stage"
+        onTouchStart={mobile ? handleStageTouchStart : undefined}
+        onTouchMove={mobile ? handleStageTouchMove : undefined}
+        onTouchEnd={mobile ? handleStageTouchEnd : undefined}
+        onTouchCancel={mobile ? handleStageTouchEnd : undefined}
+      >
+        {mobile ? (
+          <img
+            key={activeItem.image}
+            className="sol-showcase__mobile-img"
+            src={activeItem.image}
+            alt={activeItem.title}
+            loading="eager"
+            decoding="async"
+          />
+        ) : (
+          items.map((item, index) => (
+            <div
+              key={item.title}
+              className={`sol-showcase__slide${index === active ? " is-active" : ""}`}
+              aria-hidden={index !== active}
+            >
+              <img
+                src={item.image}
+                alt={item.title}
+                loading={index === active ? "eager" : "lazy"}
+                decoding="async"
+              />
+            </div>
+          ))
+        )}
+        <div className="sol-showcase__stage-glow" aria-hidden="true" />
+      </div>
+
+      <p className="sol-showcase__current" aria-live="polite">
+        {activeItem.title}
+      </p>
+
       <div
         className={`sol-showcase__tabs${scrollEdges.start ? " is-at-start" : ""}${scrollEdges.end ? " is-at-end" : ""}`}
       >
@@ -141,6 +203,7 @@ export default function SolutionsShowcase({ items }) {
         >
           <ChevronIcon direction="left" />
         </button>
+
         <div
           ref={listRef}
           className="sol-showcase__list"
@@ -152,6 +215,8 @@ export default function SolutionsShowcase({ items }) {
         >
           {items.map((item, index) => {
             const isActive = index === active;
+            const label = mobile ? (MOBILE_LABELS[item.title] ?? item.title) : item.title;
+
             return (
               <button
                 key={item.title}
@@ -167,9 +232,9 @@ export default function SolutionsShowcase({ items }) {
                 <span className="sol-showcase__index">
                   {String(index + 1).padStart(2, "0")}
                 </span>
-                <span className="sol-showcase__name">{item.title}</span>
+                <span className="sol-showcase__name">{label}</span>
                 <span className="sol-showcase__track" aria-hidden="true">
-                  {isActive && !paused && inView && (
+                  {isActive && !paused && inView && !mobile && (
                     <span
                       className="sol-showcase__progress"
                       style={{ animationDuration: `${ROTATE_MS}ms` }}
@@ -180,6 +245,7 @@ export default function SolutionsShowcase({ items }) {
             );
           })}
         </div>
+
         <button
           type="button"
           className="sol-showcase__nav-btn sol-showcase__nav-btn--next"
@@ -188,39 +254,12 @@ export default function SolutionsShowcase({ items }) {
         >
           <ChevronIcon direction="right" />
         </button>
+
         <span className="sol-showcase__fade sol-showcase__fade--left" aria-hidden="true" />
         <span className="sol-showcase__fade sol-showcase__fade--right" aria-hidden="true" />
         <span className="sol-showcase__count" aria-hidden="true">
           {String(active + 1).padStart(2, "0")} / {String(items.length).padStart(2, "0")}
         </span>
-      </div>
-
-      <p className="sol-showcase__current" aria-live="polite">
-        {items[active].title}
-      </p>
-
-      <div
-        className="sol-showcase__stage"
-        onTouchStart={handleStageTouchStart}
-        onTouchMove={handleStageTouchMove}
-        onTouchEnd={handleStageTouchEnd}
-        onTouchCancel={handleStageTouchEnd}
-      >
-        {items.map((item, index) => (
-          <div
-            key={item.title}
-            className={`sol-showcase__slide${index === active ? " is-active" : ""}`}
-            aria-hidden={index !== active}
-          >
-            <img
-              src={item.image}
-              alt={item.title}
-              loading={index === active ? "eager" : "lazy"}
-              decoding="async"
-            />
-          </div>
-        ))}
-        <div className="sol-showcase__stage-glow" aria-hidden="true" />
       </div>
 
       <div className="sol-showcase__dots" aria-hidden="true">
