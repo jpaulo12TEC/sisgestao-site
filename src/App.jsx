@@ -5,6 +5,7 @@ import Footer from "./Footer.jsx";
 import PrivacyPage from "./PrivacyPage.jsx";
 import TermsPage from "./TermsPage.jsx";
 import BrandBackground, { SiteBackdrop } from "./components/BrandBackground.jsx";
+import MobileHeroBrand from "./components/MobileHeroBrand.jsx";
 import HeroRotatingText from "./components/HeroRotatingText.jsx";
 import { Reveal } from "./hooks/useReveal.jsx";
 
@@ -88,6 +89,7 @@ function Hero() {
   return (
     <section className="hero section section-dark" id="topo">
       <BrandBackground variant="hero" glow />
+      <MobileHeroBrand />
       <div className="container hero-inner">
         <Reveal className="hero-copy hero-copy--center">
           <div className="hero-label hero-label--center">
