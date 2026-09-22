@@ -5,7 +5,7 @@ import { WHATSAPP_URL } from "./company.js";
 const navItems = [
   { id: "topo", label: "Início", href: "/#topo" },
   { id: "ecossistema", label: "Ecossistema", href: "/#ecossistema" },
-  { id: "historia", label: "História", href: "/#historia" },
+  { id: "solucoes", label: "Soluções", href: "/#solucoes" },
   { id: "contato", label: "Contato", href: "/#contato" },
 ];
 

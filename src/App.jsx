@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+﻿import { useEffect, useState } from "react";
 import { COMPANY, whatsappLink } from "./company.js";
 import Header from "./Header.jsx";
 import Footer from "./Footer.jsx";
@@ -8,8 +8,7 @@ import { Reveal } from "./hooks/useReveal.jsx";
 
 const WA = {
   pdv: whatsappLink("Olá, quero conhecer o PDV SuaVenda para a minha loja."),
-  estoque: whatsappLink("Olá, quero conhecer a gestão de estoque da SISgestão."),
-  parceria: whatsappLink("Olá, quero uma parceria para um sistema sob medida."),
+  estoque: whatsappLink("Olá, quero uma gestão de estoque personalizada para a minha operação."),
   publico: whatsappLink("Olá, preciso de um sistema para órgão público."),
   geral: whatsappLink("Olá, quero conversar com a SISgestão."),
 };
@@ -17,41 +16,35 @@ const WA = {
 const ecosystem = [
   {
     num: "01",
-    href: "#varejo",
-    title: "Varejo",
-    text: "O caixa abre, a venda acontece e o estoque precisa acompanhar.",
+    href: "#estoque",
+    title: "Estoque",
+    text: "Gestão de estoque desenhada para a rotina da sua operação.",
   },
   {
     num: "02",
-    href: "#parceria",
-    title: "Parceria",
-    text: "Quando a rotina não cabe num produto pronto, o sistema nasce junto.",
+    href: "#varejo",
+    title: "PDV",
+    text: "O caixa da loja, com a venda registrada no balcão.",
   },
   {
     num: "03",
     href: "#publico",
     title: "Setor público",
-    text: "A mesma clareza de processo, agora do lado de quem atende a cidade.",
+    text: "Processo claro para quem atende a cidade.",
   },
+];
+
+const stockPoints = [
+  "Montado para a sua operação, não um pacote igual para todo mundo",
+  "Produtos, preço, categorias e estoque mínimo do seu jeito",
+  "Entrada e saída com a quantidade atualizada na hora",
+  "Aviso quando o item está acabando",
 ];
 
 const pdvPoints = [
   "Ponto de venda no computador da loja",
   "Venda no balcão, inclusive por peso",
   "Caixa com operador e gerente",
-];
-
-const stockPoints = [
-  "Produtos, preço e estoque mínimo",
-  "Entrada e saída com a quantidade atualizada",
-  "Aviso quando o item está acabando",
-];
-
-const partnerSteps = [
-  { num: "01", title: "Escuta", text: "A rotina vem antes da tela." },
-  { num: "02", title: "Desenho", text: "Módulos combinados com você." },
-  { num: "03", title: "Construção", text: "Ciclos curtos, sistema visível." },
-  { num: "04", title: "Virada", text: "Implantação, treino e suporte." },
 ];
 
 const publicPoints = [
@@ -89,12 +82,12 @@ function Hero() {
             </span>
           </h1>
           <p className="hero-lead hero-line">
-            A história começa no balcão, segue quando o sistema precisa ser feito
-            em parceria e chega ao órgão público. Um ecossistema, a mesma equipe.
+            Gestão de estoque feita para a sua operação, PDV no balcão e sistemas
+            para o setor público. Um ecossistema, a mesma equipe.
           </p>
           <div className="hero-actions hero-line">
-            <a className="button primary" href="#ecossistema">
-              Conheça o ecossistema
+            <a className="button primary" href="#solucoes">
+              Ver nossas soluções
             </a>
             <a className="button secondary" href={WA.geral} target="_blank" rel="noreferrer">
               Fale conosco
@@ -120,7 +113,7 @@ function Ecosystem() {
               <span className="eco-card__num">{item.num}</span>
               <strong>{item.title}</strong>
               <span>{item.text}</span>
-              <span className="eco-card__go">Ver capítulo</span>
+              <span className="eco-card__go">Ver solução</span>
             </Reveal>
           ))}
         </div>
@@ -129,91 +122,64 @@ function Ecosystem() {
   );
 }
 
-function Story() {
+function Solutions() {
   return (
-    <section className="section section-story" id="historia">
+    <section className="section section-story" id="solucoes">
       <div className="container">
         <Reveal className="section-intro section-intro--light">
-          <p className="kicker">História</p>
-          <h2>Do primeiro item no caixa até o processo do órgão.</h2>
+          <p className="kicker">Nossas soluções</p>
+          <h2>Estoque sob medida, PDV e setor público.</h2>
         </Reveal>
 
         <div className="chapters">
           <span className="chapters__rail" aria-hidden="true" />
 
-          <Reveal as="article" className="chapter" id="varejo">
+          <Reveal as="article" className="chapter chapter--lead" id="estoque">
             <span className="chapter__index">01</span>
             <div className="chapter__body">
-              <p className="kicker">Varejo</p>
-              <h3>O dia começa no caixa.</h3>
+              <p className="kicker">Gestão de estoque</p>
+              <h3>Personalizada para a sua necessidade.</h3>
               <p>
-                Alguém pesa, cobra e segue para o próximo cliente. O PDV SuaVenda
-                é o capítulo da loja: a venda fica registrada no computador do balcão.
+                Cada operação conta o estoque de um jeito. A SISgestão desenha o
+                controle de produtos, entradas e saídas em cima da sua rotina —
+                o que entra, o que sai e o que não pode faltar.
               </p>
-              <div className="chapter__panel">
-                <img src="/brand/suavenda-logo.png" alt="Logo SuaVenda, PDV da SISgestão" />
-                <div>
-                  <ul>
-                    {pdvPoints.map((point) => (
-                      <li key={point}>{point}</li>
-                    ))}
-                  </ul>
-                  <p className="fine-print">
-                    A emissão de NFC-e em produção ainda está em preparação. O caixa
-                    já organiza a venda no balcão.
-                  </p>
-                  <a className="button primary" href={WA.pdv} target="_blank" rel="noreferrer">
-                    Quero o PDV na minha loja
-                  </a>
-                </div>
-              </div>
-
-              <div className="stock-row">
-                <div>
-                  <p className="kicker">Logo depois da venda</p>
-                  <h3>O estoque precisa saber o que saiu.</h3>
-                  <ul>
-                    {stockPoints.map((point) => (
-                      <li key={point}>{point}</li>
-                    ))}
-                  </ul>
-                  <a className="button secondary" href={WA.estoque} target="_blank" rel="noreferrer">
-                    Falar sobre estoque
-                  </a>
-                </div>
-              </div>
+              <ul>
+                {stockPoints.map((point) => (
+                  <li key={point}>{point}</li>
+                ))}
+              </ul>
+              <a className="button primary" href={WA.estoque} target="_blank" rel="noreferrer">
+                Quero o estoque da minha operação
+              </a>
             </div>
           </Reveal>
 
-          <Reveal as="article" className="chapter" id="parceria" delay={40}>
+          <Reveal as="article" className="chapter" id="varejo" delay={40}>
             <span className="chapter__index">02</span>
             <div className="chapter__body">
-              <p className="kicker">Parceria</p>
-              <h3>Tem rotina que ainda não tem sistema.</h3>
-              <p>
-                Aí a SISgestão entra como parceira. A gente escuta a operação e
-                constrói o que o catálogo não cobre — como a vitrine e o painel da
-                Boutique da GI.
-              </p>
-              <div className="step-row">
-                {partnerSteps.map((step) => (
-                  <article key={step.num}>
-                    <span>{step.num}</span>
-                    <h3>{step.title}</h3>
-                    <p>{step.text}</p>
-                  </article>
-                ))}
+              <div className="solution-title">
+                <img className="solution-mark" src="/brand/suavenda-icon.png" alt="" />
+                <div>
+                  <p className="kicker">Ponto de venda</p>
+                  <h3>SuaVenda no balcão.</h3>
+                </div>
               </div>
-              <figure className="case-card">
-                <img src="/brand/gi-modas-web.png" alt="Logo Gi Modas" />
-                <figcaption>
-                  <p className="kicker">Capítulo de loja</p>
-                  <h3>Boutique da GI</h3>
-                  <p>Vitrine para quem compra. Painel para quem vende e administra.</p>
-                </figcaption>
-              </figure>
-              <a className="button primary" href={WA.parceria} target="_blank" rel="noreferrer">
-                Quero uma parceria
+              <p>
+                O PDV da SISgestão para quem vende no caixa. A venda fica
+                registrada no computador da loja, inclusive no comércio por peso.
+              </p>
+              <ul>
+                {pdvPoints.map((point) => (
+                  <li key={point}>{point}</li>
+                ))}
+              </ul>
+              <p className="fine-print">
+                A emissão de NFC-e em produção ainda está em preparação. O caixa
+                já organiza a venda no balcão.
+              </p>
+              <a className="button primary" href={WA.pdv} target="_blank" rel="noreferrer">
+                Quero o PDV na minha loja
               </a>
             </div>
           </Reveal>
@@ -222,10 +188,10 @@ function Story() {
             <span className="chapter__index">03</span>
             <div className="chapter__body">
               <p className="kicker">Setor público</p>
-              <h3>A cidade também abre o expediente.</h3>
+              <h3>Processo para quem atende a cidade.</h3>
               <p>
-                Órgão, câmara e gestão pública pedem processo claro. Licitação,
-                rotina e um sistema que a equipe consiga usar no dia seguinte.
+                Órgão, câmara e gestão pública pedem rotina clara. Licitação,
+                processo e um sistema que a equipe consiga usar.
               </p>
               <ul className="public-list">
                 {publicPoints.map((point) => (
@@ -249,18 +215,18 @@ function Contact() {
       <div className="container contact-grid">
         <Reveal>
           <p className="kicker">Contato</p>
-          <h2>O próximo capítulo começa numa conversa.</h2>
+          <h2>Conta qual solução você precisa.</h2>
           <p className="contact-lead">
-            Loja, parceria ou órgão. A resposta costuma sair no mesmo dia, pelo
-            WhatsApp. Atendimento em Aracaju e à distância.
+            Estoque sob medida, PDV ou órgão público. A resposta costuma sair no
+            mesmo dia, pelo WhatsApp. Atendimento em Aracaju e à distância.
           </p>
         </Reveal>
         <Reveal className="contact-card" delay={80}>
+          <a href={WA.estoque} target="_blank" rel="noreferrer">
+            WhatsApp · estoque personalizado
+          </a>
           <a href={WA.pdv} target="_blank" rel="noreferrer">
             WhatsApp · PDV SuaVenda
-          </a>
-          <a href={WA.parceria} target="_blank" rel="noreferrer">
-            WhatsApp · parceria
           </a>
           <a href={WA.publico} target="_blank" rel="noreferrer">
             WhatsApp · setor público
@@ -288,7 +254,7 @@ function HomePage() {
       <main>
         <Hero />
         <Ecosystem />
-        <Story />
+        <Solutions />
         <Contact />
       </main>
       <Footer />
