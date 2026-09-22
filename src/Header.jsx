@@ -53,15 +53,15 @@ export default function Header() {
   }, []);
 
   return (
-    <header className={`site-header${scrolled ? " is-scrolled" : ""}`}>
-      <nav className="container nav" aria-label="Navegação principal">
-        <a className="brand" href="/" onClick={closeMenu}>
-          <img src={logo} alt="SISgestão" />
+    <header className={`topbar${scrolled ? " is-scrolled" : ""}${isOpen ? " is-open" : ""}`}>
+      <div className="topbar__bar">
+        <a className="topbar__brand" href="/" onClick={closeMenu}>
+          <img src={logo} alt="" />
           <span>SISgestão</span>
         </a>
 
         <button
-          className={`menu-button${isOpen ? " is-open" : ""}`}
+          className="topbar__burger"
           type="button"
           aria-expanded={isOpen}
           aria-controls="site-menu"
@@ -73,28 +73,22 @@ export default function Header() {
           <span />
         </button>
 
-        <div
-          className={`nav-overlay${isOpen ? " is-open" : ""}`}
-          aria-hidden="true"
-          onClick={closeMenu}
-        />
-
-        <div className={`nav-links${isOpen ? " is-open" : ""}`} id="site-menu">
+        <nav className="topbar__menu" id="site-menu" aria-label="Navegação principal">
           {navItems.map((item) => (
             <a
               key={item.href}
               href={item.href}
-              aria-current={active === item.id ? "true" : undefined}
+              aria-current={active === item.id ? "page" : undefined}
               onClick={closeMenu}
             >
               {item.label}
             </a>
           ))}
-          <a className="nav-cta" href={WHATSAPP_URL} target="_blank" rel="noreferrer">
+          <a className="btn btn-blue topbar__cta" href={WHATSAPP_URL} target="_blank" rel="noreferrer">
             Fale conosco
           </a>
-        </div>
-      </nav>
+        </nav>
+      </div>
     </header>
   );
 }

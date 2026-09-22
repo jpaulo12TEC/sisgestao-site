@@ -86,10 +86,10 @@ function Hero() {
             para o setor público. Um ecossistema, a mesma equipe.
           </p>
           <div className="hero-actions hero-line">
-            <a className="button primary" href="#solucoes">
+            <a className="btn btn-blue" href="#solucoes">
               Ver nossas soluções
             </a>
-            <a className="button secondary" href={WA.geral} target="_blank" rel="noreferrer">
+            <a className="btn btn-line" href={WA.geral} target="_blank" rel="noreferrer">
               Fale conosco
             </a>
           </div>
@@ -124,84 +124,72 @@ function Ecosystem() {
 
 function Solutions() {
   return (
-    <section className="section section-story" id="solucoes">
+    <section className="section section-catalog" id="solucoes">
       <div className="container">
-        <Reveal className="section-intro section-intro--light">
+        <Reveal className="section-intro">
           <p className="kicker">Nossas soluções</p>
           <h2>Estoque sob medida, PDV e setor público.</h2>
         </Reveal>
 
-        <div className="chapters">
-          <span className="chapters__rail" aria-hidden="true" />
-
-          <Reveal as="article" className="chapter chapter--lead" id="estoque">
-            <span className="chapter__index">01</span>
-            <div className="chapter__body">
-              <p className="kicker">Gestão de estoque</p>
-              <h3>Personalizada para a sua necessidade.</h3>
-              <p>
-                Cada operação conta o estoque de um jeito. A SISgestão desenha o
-                controle de produtos, entradas e saídas em cima da sua rotina —
-                o que entra, o que sai e o que não pode faltar.
-              </p>
-              <ul>
-                {stockPoints.map((point) => (
-                  <li key={point}>{point}</li>
-                ))}
-              </ul>
-              <a className="button primary" href={WA.estoque} target="_blank" rel="noreferrer">
-                Quero o estoque da minha operação
-              </a>
-            </div>
+        <div className="catalog">
+          <Reveal as="article" className="catalog-card catalog-card--lead" id="estoque">
+            <p className="kicker">Gestão de estoque</p>
+            <h3>Personalizada para a sua necessidade.</h3>
+            <p>
+              Cada operação conta o estoque de um jeito. O controle de produtos,
+              entradas e saídas nasce da sua rotina.
+            </p>
+            <ul>
+              {stockPoints.map((point) => (
+                <li key={point}>{point}</li>
+              ))}
+            </ul>
+            <a className="btn btn-blue" href={WA.estoque} target="_blank" rel="noreferrer">
+              Quero o estoque da minha operação
+            </a>
           </Reveal>
 
-          <Reveal as="article" className="chapter" id="varejo" delay={40}>
-            <span className="chapter__index">02</span>
-            <div className="chapter__body">
-              <div className="solution-title">
-                <img className="solution-mark" src="/brand/suavenda-icon.png" alt="" />
-                <div>
-                  <p className="kicker">Ponto de venda</p>
-                  <h3>SuaVenda no balcão.</h3>
-                </div>
+          <Reveal as="article" className="catalog-card" id="varejo" delay={80}>
+            <div className="solution-title">
+              <img className="solution-mark" src="/brand/suavenda-icon.png" alt="" />
+              <div>
+                <p className="kicker">Ponto de venda</p>
+                <h3>SuaVenda</h3>
               </div>
-              <p>
-                O PDV da SISgestão para quem vende no caixa. A venda fica
-                registrada no computador da loja, inclusive no comércio por peso.
-              </p>
-              <ul>
-                {pdvPoints.map((point) => (
-                  <li key={point}>{point}</li>
-                ))}
-              </ul>
-              <p className="fine-print">
-                A emissão de NFC-e em produção ainda está em preparação. O caixa
-                já organiza a venda no balcão.
-              </p>
-              <a className="button primary" href={WA.pdv} target="_blank" rel="noreferrer">
-                Quero o PDV na minha loja
-              </a>
             </div>
+            <p>
+              O PDV para quem vende no caixa. A venda fica no computador da loja,
+              inclusive no comércio por peso.
+            </p>
+            <ul>
+              {pdvPoints.map((point) => (
+                <li key={point}>{point}</li>
+              ))}
+            </ul>
+            <p className="fine-print">
+              A emissão de NFC-e em produção ainda está em preparação. O caixa já
+              organiza a venda no balcão.
+            </p>
+            <a className="btn btn-blue" href={WA.pdv} target="_blank" rel="noreferrer">
+              Quero o PDV na minha loja
+            </a>
           </Reveal>
 
-          <Reveal as="article" className="chapter" id="publico" delay={40}>
-            <span className="chapter__index">03</span>
-            <div className="chapter__body">
-              <p className="kicker">Setor público</p>
-              <h3>Processo para quem atende a cidade.</h3>
-              <p>
-                Órgão, câmara e gestão pública pedem rotina clara. Licitação,
-                processo e um sistema que a equipe consiga usar.
-              </p>
-              <ul className="public-list">
-                {publicPoints.map((point) => (
-                  <li key={point}>{point}</li>
-                ))}
-              </ul>
-              <a className="button primary" href={WA.publico} target="_blank" rel="noreferrer">
-                Falar sobre o órgão
-              </a>
-            </div>
+          <Reveal as="article" className="catalog-card" id="publico" delay={140}>
+            <p className="kicker">Setor público</p>
+            <h3>Para quem atende a cidade.</h3>
+            <p>
+              Órgão, câmara e gestão pública, com processo claro e um sistema que
+              a equipe consiga usar.
+            </p>
+            <ul>
+              {publicPoints.map((point) => (
+                <li key={point}>{point}</li>
+              ))}
+            </ul>
+            <a className="btn btn-blue" href={WA.publico} target="_blank" rel="noreferrer">
+              Falar sobre o órgão
+            </a>
           </Reveal>
         </div>
       </div>
@@ -232,7 +220,7 @@ function Contact() {
             WhatsApp · setor público
           </a>
           <a href={`mailto:${COMPANY.email}`}>{COMPANY.email}</a>
-          <a className="button primary full" href={WA.geral} target="_blank" rel="noreferrer">
+          <a className="btn btn-blue btn-block" href={WA.geral} target="_blank" rel="noreferrer">
             Fale conosco · {COMPANY.phoneDisplay}
           </a>
         </Reveal>
