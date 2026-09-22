@@ -1101,3 +1101,133 @@ body.theme-sis .legal-content a {
     padding: 0 16px;
   }
 }
+
+a.catalog-link {
+  color: inherit;
+  text-decoration: none;
+}
+
+a.catalog-link h3 {
+  color: #0a0a0a;
+}
+
+.solution-page {
+  padding: 36px 0 72px;
+  background: #fff;
+}
+
+.solution-page h1 {
+  max-width: 14em;
+  margin: 0 0 12px;
+  color: #0a0a0a;
+  font-size: clamp(2rem, 5vw, 3.4rem);
+  font-weight: 800;
+  letter-spacing: -0.045em;
+  line-height: 1.05;
+}
+
+.crumb {
+  margin: 0 0 18px;
+  color: #5c6570;
+  font-size: 0.85rem;
+}
+
+.crumb a {
+  color: #0057ff;
+  font-weight: 700;
+}
+
+.solution-lead {
+  max-width: 40rem;
+  margin: 0 0 28px;
+  color: #5c6570;
+  font-size: 1.05rem;
+  line-height: 1.65;
+}
+
+.offer-grid,
+.public-catalog {
+  display: grid;
+  gap: 14px;
+}
+
+.offer-card,
+.public-catalog article,
+.solution-close {
+  padding: 20px;
+  border: 1px solid rgba(10, 10, 10, 0.1);
+  border-radius: 20px;
+  background: #fff;
+}
+
+.offer-card h2,
+.public-catalog h2,
+.fit-steps h2,
+.solution-close h2 {
+  margin: 0 0 8px;
+  color: #0a0a0a;
+  font-size: 1.35rem;
+  letter-spacing: -0.03em;
+}
+
+.offer-card p,
+.public-catalog p,
+.fit-steps p,
+.solution-close p {
+  margin: 0;
+  color: #5c6570;
+  line-height: 1.6;
+}
+
+.public-catalog article {
+  border-left: 4px solid #0057ff;
+}
+
+.fit-steps {
+  display: grid;
+  gap: 12px;
+  margin: 0 0 28px;
+  padding: 0;
+  list-style: none;
+}
+
+.fit-steps li {
+  display: grid;
+  grid-template-columns: 48px 1fr;
+  gap: 12px;
+  align-items: start;
+}
+
+.fit-steps span {
+  color: #0057ff;
+  font-weight: 800;
+}
+
+.solution-note {
+  margin: 16px 0 0;
+}
+
+.solution-close {
+  margin-top: 28px;
+  background: #070b14;
+}
+
+.solution-close h2,
+.solution-close p {
+  color: #fff;
+}
+
+.solution-close p {
+  color: #c5ceda;
+  margin-bottom: 16px;
+}
+
+@media (min-width: 800px) {
+  .offer-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .public-catalog {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}

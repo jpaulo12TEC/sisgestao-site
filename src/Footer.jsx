@@ -18,10 +18,9 @@ export default function Footer() {
 
         <div className="footer-col">
           <p className="footer-label">Caminhos</p>
-          <a href="/#ecossistema">Ecossistema</a>
-          <a href="/#estoque">Estoque sob medida</a>
-          <a href="/#varejo">PDV SuaVenda</a>
-          <a href="/#publico">Setor público</a>
+          <a href="/solucoes/varejo">Soluções para o varejo</a>
+          <a href="/solucoes/personalizadas">Soluções personalizadas</a>
+          <a href="/solucoes/orgaos-publicos">Órgãos públicos</a>
         </div>
 
         <div className="footer-col">

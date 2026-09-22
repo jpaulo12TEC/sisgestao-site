@@ -4,6 +4,7 @@ import Header from "./Header.jsx";
 import Footer from "./Footer.jsx";
 import PrivacyPage from "./PrivacyPage.jsx";
 import TermsPage from "./TermsPage.jsx";
+import { PublicoPage, PersonalizadasPage, VarejoPage } from "./SolutionPages.jsx";
 import { Reveal } from "./hooks/useReveal.jsx";
 
 const WA = {
@@ -13,44 +14,25 @@ const WA = {
   geral: whatsappLink("Olá, quero conversar com a SISgestão."),
 };
 
-const ecosystem = [
+const doors = [
   {
+    href: "/solucoes/varejo",
     num: "01",
-    href: "#estoque",
-    title: "Estoque",
-    text: "Gestão de estoque desenhada para a rotina da sua operação.",
+    title: "Soluções para o varejo",
+    text: "PDV e estoque para a rotina da loja e do balcão.",
   },
   {
+    href: "/solucoes/personalizadas",
     num: "02",
-    href: "#varejo",
-    title: "PDV",
-    text: "O caixa da loja, com a venda registrada no balcão.",
+    title: "Soluções personalizadas",
+    text: "Gestão de estoque e sistemas feitos para a sua necessidade.",
   },
   {
+    href: "/solucoes/orgaos-publicos",
     num: "03",
-    href: "#publico",
-    title: "Setor público",
-    text: "Processo claro para quem atende a cidade.",
+    title: "Soluções para órgãos públicos",
+    text: "Processo e rotina para quem atende a cidade.",
   },
-];
-
-const stockPoints = [
-  "Montado para a sua operação, não um pacote igual para todo mundo",
-  "Produtos, preço, categorias e estoque mínimo do seu jeito",
-  "Entrada e saída com a quantidade atualizada na hora",
-  "Aviso quando o item está acabando",
-];
-
-const pdvPoints = [
-  "Ponto de venda no computador da loja",
-  "Venda no balcão, inclusive por peso",
-  "Caixa com operador e gerente",
-];
-
-const publicPoints = [
-  "Sistemas para a rotina do órgão",
-  "Apoio a licitações e processo",
-  "Implantação próxima, com treinamento",
 ];
 
 function usePathname() {
@@ -99,98 +81,23 @@ function Hero() {
   );
 }
 
-function Ecosystem() {
-  return (
-    <section className="section section-muted" id="ecossistema">
-      <div className="container">
-        <Reveal className="section-intro">
-          <p className="kicker">Ecossistema</p>
-          <h2>Três caminhos. Uma forma de trabalhar.</h2>
-        </Reveal>
-        <div className="eco-grid">
-          {ecosystem.map((item, index) => (
-            <Reveal as="a" className="eco-card" href={item.href} key={item.num} delay={index * 90}>
-              <span className="eco-card__num">{item.num}</span>
-              <strong>{item.title}</strong>
-              <span>{item.text}</span>
-              <span className="eco-card__go">Ver solução</span>
-            </Reveal>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
 function Solutions() {
   return (
     <section className="section section-catalog" id="solucoes">
       <div className="container">
         <Reveal className="section-intro">
           <p className="kicker">Nossas soluções</p>
-          <h2>Estoque sob medida, PDV e setor público.</h2>
+          <h2>Três frentes. Escolha a sua.</h2>
         </Reveal>
-
         <div className="catalog">
-          <Reveal as="article" className="catalog-card catalog-card--lead" id="estoque">
-            <p className="kicker">Gestão de estoque</p>
-            <h3>Personalizada para a sua necessidade.</h3>
-            <p>
-              Cada operação conta o estoque de um jeito. O controle de produtos,
-              entradas e saídas nasce da sua rotina.
-            </p>
-            <ul>
-              {stockPoints.map((point) => (
-                <li key={point}>{point}</li>
-              ))}
-            </ul>
-            <a className="btn btn-blue" href={WA.estoque} target="_blank" rel="noreferrer">
-              Quero o estoque da minha operação
-            </a>
-          </Reveal>
-
-          <Reveal as="article" className="catalog-card" id="varejo" delay={80}>
-            <div className="solution-title">
-              <img className="solution-mark" src="/brand/suavenda-icon.png" alt="" />
-              <div>
-                <p className="kicker">Ponto de venda</p>
-                <h3>SuaVenda</h3>
-              </div>
-            </div>
-            <p>
-              O PDV para quem vende no caixa. A venda fica no computador da loja,
-              inclusive no comércio por peso.
-            </p>
-            <ul>
-              {pdvPoints.map((point) => (
-                <li key={point}>{point}</li>
-              ))}
-            </ul>
-            <p className="fine-print">
-              A emissão de NFC-e em produção ainda está em preparação. O caixa já
-              organiza a venda no balcão.
-            </p>
-            <a className="btn btn-blue" href={WA.pdv} target="_blank" rel="noreferrer">
-              Quero o PDV na minha loja
-            </a>
-          </Reveal>
-
-          <Reveal as="article" className="catalog-card" id="publico" delay={140}>
-            <p className="kicker">Setor público</p>
-            <h3>Para quem atende a cidade.</h3>
-            <p>
-              Órgão, câmara e gestão pública, com processo claro e um sistema que
-              a equipe consiga usar.
-            </p>
-            <ul>
-              {publicPoints.map((point) => (
-                <li key={point}>{point}</li>
-              ))}
-            </ul>
-            <a className="btn btn-blue" href={WA.publico} target="_blank" rel="noreferrer">
-              Falar sobre o órgão
-            </a>
-          </Reveal>
+          {doors.map((item, index) => (
+            <Reveal as="a" className="catalog-card catalog-link" href={item.href} key={item.href} delay={index * 80}>
+              <span className="eco-card__num">{item.num}</span>
+              <h3>{item.title}</h3>
+              <p>{item.text}</p>
+              <span className="eco-card__go">Abrir página</span>
+            </Reveal>
+          ))}
         </div>
       </div>
     </section>
@@ -241,7 +148,6 @@ function HomePage() {
       <Header />
       <main>
         <Hero />
-        <Ecosystem />
         <Solutions />
         <Contact />
       </main>
@@ -268,6 +174,18 @@ export default function App() {
 
   if (pathname === "/termos") {
     return <TermsPage />;
+  }
+
+  if (pathname === "/solucoes/varejo") {
+    return <VarejoPage />;
+  }
+
+  if (pathname === "/solucoes/personalizadas") {
+    return <PersonalizadasPage />;
+  }
+
+  if (pathname === "/solucoes/orgaos-publicos") {
+    return <PublicoPage />;
   }
 
   return <HomePage />;

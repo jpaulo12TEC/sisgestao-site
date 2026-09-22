@@ -4,7 +4,6 @@ import { WHATSAPP_URL } from "./company.js";
 
 const navItems = [
   { id: "topo", label: "Início", href: "/#topo" },
-  { id: "ecossistema", label: "Ecossistema", href: "/#ecossistema" },
   { id: "solucoes", label: "Soluções", href: "/#solucoes" },
   { id: "contato", label: "Contato", href: "/#contato" },
 ];
@@ -33,6 +32,11 @@ export default function Header() {
   }, []);
 
   useEffect(() => {
+    if (window.location.pathname.startsWith("/solucoes")) {
+      setActive("solucoes");
+      return undefined;
+    }
+
     const nodes = navItems
       .map((item) => document.getElementById(item.id))
       .filter(Boolean);
