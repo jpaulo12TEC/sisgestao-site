@@ -1,5 +1,5 @@
 import logo from "../Capa = Insta.png";
-import { COMPANY } from "./company.js";
+import { COMPANY, INSTAGRAM_URL, WHATSAPP_URL } from "./company.js";
 
 export default function Footer() {
   return (
@@ -10,20 +10,40 @@ export default function Footer() {
             <img src={logo} alt="" />
             <span>{COMPANY.brand}</span>
           </a>
-          <p className="footer-tagline">PDV e estoque para o varejo · parceria sob medida · setor público.</p>
-          <p className="footer-legal-name">
-            {COMPANY.legalName} — CNPJ {COMPANY.cnpj}
-          </p>
+          <p className="footer-tagline">Soluções inteligentes para gestão.</p>
           <p className="footer-operator">
-            A marca {COMPANY.brand} é operada por {COMPANY.legalName}, inscrita no CNPJ{" "}
-            {COMPANY.cnpj}.
+            {COMPANY.legalName} — CNPJ {COMPANY.cnpj}
           </p>
         </div>
 
-        <div className="footer-links">
-          <a href="/privacidade">Política de Privacidade</a>
-          <a href="/termos">Termos de Uso</a>
+        <div className="footer-col">
+          <p className="footer-label">Caminhos</p>
+          <a href="/#ecossistema">Ecossistema</a>
+          <a href="/#varejo">PDV SuaVenda</a>
+          <a href="/#parceria">Parceria</a>
+          <a href="/#publico">Setor público</a>
+        </div>
+
+        <div className="footer-col">
+          <p className="footer-label">Contato</p>
+          <a href={WHATSAPP_URL} target="_blank" rel="noreferrer">
+            {COMPANY.phoneDisplay}
+          </a>
           <a href={`mailto:${COMPANY.email}`}>{COMPANY.email}</a>
+          <a href={INSTAGRAM_URL} target="_blank" rel="noreferrer">
+            @sisgestaosoft
+          </a>
+          <p className="footer-address">{COMPANY.address}</p>
+        </div>
+      </div>
+
+      <div className="container footer-legal">
+        <p>
+          A marca {COMPANY.brand} é operada por {COMPANY.legalName}.
+        </p>
+        <div className="footer-links">
+          <a href="/privacidade">Privacidade</a>
+          <a href="/termos">Termos</a>
         </div>
       </div>
     </footer>
