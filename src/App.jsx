@@ -8,9 +8,6 @@ import { PublicoPage, PersonalizadasPage, VarejoPage } from "./SolutionPages.jsx
 import { Reveal } from "./hooks/useReveal.jsx";
 
 const WA = {
-  pdv: whatsappLink("Olá, quero conhecer o PDV SuaVenda para a minha loja."),
-  estoque: whatsappLink("Olá, quero uma gestão de estoque personalizada para a minha operação."),
-  publico: whatsappLink("Olá, preciso de um sistema para órgão público."),
   geral: whatsappLink("Olá, quero conversar com a SISgestão."),
 };
 
@@ -162,29 +159,22 @@ function Solutions() {
 function Contact() {
   return (
     <section className="section section-cta" id="contato">
-      <div className="container contact-grid">
-        <Reveal>
+      <div className="container">
+        <Reveal className="contact-band">
           <p className="kicker">Contato</p>
           <h2>Conta qual solução você precisa.</h2>
-          <p className="contact-lead">
+          <p>
             Estoque sob medida, PDV ou órgão público. A resposta costuma sair no
-            mesmo dia, pelo WhatsApp. Atendimento em Aracaju e à distância.
+            mesmo dia. Atendimento em Aracaju e à distância.
           </p>
-        </Reveal>
-        <Reveal className="contact-card" delay={80}>
-          <a href={WA.estoque} target="_blank" rel="noreferrer">
-            WhatsApp · estoque personalizado
+          <a className="btn btn-blue" href={WA.geral} target="_blank" rel="noreferrer">
+            Falar no WhatsApp
           </a>
-          <a href={WA.pdv} target="_blank" rel="noreferrer">
-            WhatsApp · PDV SuaVenda
-          </a>
-          <a href={WA.publico} target="_blank" rel="noreferrer">
-            WhatsApp · setor público
-          </a>
-          <a href={`mailto:${COMPANY.email}`}>{COMPANY.email}</a>
-          <a className="btn btn-blue btn-block" href={WA.geral} target="_blank" rel="noreferrer">
-            Fale conosco · {COMPANY.phoneDisplay}
-          </a>
+          <p className="contact-band__meta">
+            {COMPANY.phoneDisplay}
+            <span aria-hidden="true"> · </span>
+            <a href={`mailto:${COMPANY.email}`}>{COMPANY.email}</a>
+          </p>
         </Reveal>
       </div>
     </section>
