@@ -13,3 +13,7 @@ export const COMPANY = {
 
 export const WHATSAPP_URL = `https://wa.me/${COMPANY.whatsapp}`;
 export const INSTAGRAM_URL = "https://instagram.com/sisgestaosoft";
+
+export function whatsappLink(message) {
+  return `${WHATSAPP_URL}?text=${encodeURIComponent(message)}`;
+}

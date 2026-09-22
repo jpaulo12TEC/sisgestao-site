@@ -10,7 +10,7 @@ export default function Footer() {
             <img src={logo} alt="" />
             <span>{COMPANY.brand}</span>
           </a>
-          <p className="footer-tagline">Software de gestão · Web e mobile.</p>
+          <p className="footer-tagline">PDV e estoque para o varejo · parceria sob medida · setor público.</p>
           <p className="footer-legal-name">
             {COMPANY.legalName} — CNPJ {COMPANY.cnpj}
           </p>

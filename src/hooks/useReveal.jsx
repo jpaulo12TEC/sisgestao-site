@@ -25,7 +25,7 @@ export function useReveal(threshold = 0.15) {
   return [ref, visible];
 }
 
-export function Reveal({ children, className = "", delay = 0, as: Tag = "div" }) {
+export function Reveal({ children, className = "", delay = 0, as: Tag = "div", ...rest }) {
   const [ref, visible] = useReveal();
 
   return (
@@ -33,6 +33,7 @@ export function Reveal({ children, className = "", delay = 0, as: Tag = "div" })
       ref={ref}
       className={`reveal ${visible ? "is-visible" : ""} ${className}`.trim()}
       style={{ "--reveal-delay": `${delay}ms` }}
+      {...rest}
     >
       {children}
     </Tag>

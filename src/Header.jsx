@@ -3,9 +3,9 @@ import logo from "../Capa = Insta.png";
 import { WHATSAPP_URL } from "./company.js";
 
 const navItems = [
-  { label: "Soluções", href: "/#solucoes" },
-  { label: "Diferenciais", href: "/#diferenciais" },
-  { label: "Método", href: "/#metodo" },
+  { label: "Varejo", href: "/#varejo" },
+  { label: "Parceria", href: "/#parceria" },
+  { label: "Setor público", href: "/#publico" },
   { label: "Contato", href: "/#contato" },
 ];
 
