@@ -14,25 +14,23 @@ const WA = {
   geral: whatsappLink("Olá, quero conversar com a SISgestão."),
 };
 
-const doors = [
-  {
-    href: "/solucoes/varejo",
-    num: "01",
-    title: "Soluções para o varejo",
-    text: "PDV e estoque para a rotina da loja e do balcão.",
-  },
-  {
-    href: "/solucoes/personalizadas",
-    num: "02",
-    title: "Soluções personalizadas",
-    text: "Gestão de estoque e sistemas feitos para a sua necessidade.",
-  },
-  {
-    href: "/solucoes/orgaos-publicos",
-    num: "03",
-    title: "Soluções para órgãos públicos",
-    text: "Processo e rotina para quem atende a cidade.",
-  },
+const stockPoints = [
+  "Montado para a sua operação, não um pacote igual para todo mundo",
+  "Produtos, preço, categorias e estoque mínimo do seu jeito",
+  "Entrada e saída com a quantidade atualizada na hora",
+  "Aviso quando o item está acabando",
+];
+
+const pdvPoints = [
+  "Ponto de venda no computador da loja",
+  "Venda no balcão, inclusive por peso",
+  "Caixa com operador e gerente",
+];
+
+const publicPoints = [
+  "Sistemas para a rotina do órgão",
+  "Apoio a licitações e processo",
+  "Implantação próxima, com treinamento",
 ];
 
 function usePathname() {
@@ -76,6 +74,12 @@ function Hero() {
             </a>
           </div>
         </div>
+        <figure className="hero-visual">
+          <img
+            src="/hero-sisgestao.png"
+            alt="Ponto de venda, estoque e gestão pública no mesmo ecossistema."
+          />
+        </figure>
       </div>
     </section>
   );
@@ -87,17 +91,68 @@ function Solutions() {
       <div className="container">
         <Reveal className="section-intro">
           <p className="kicker">Nossas soluções</p>
-          <h2>Três frentes. Escolha a sua.</h2>
+          <h2>Estoque sob medida, PDV e setor público.</h2>
         </Reveal>
         <div className="catalog">
-          {doors.map((item, index) => (
-            <Reveal as="a" className="catalog-card catalog-link" href={item.href} key={item.href} delay={index * 80}>
-              <span className="eco-card__num">{item.num}</span>
-              <h3>{item.title}</h3>
-              <p>{item.text}</p>
-              <span className="eco-card__go">Abrir página</span>
-            </Reveal>
-          ))}
+          <Reveal as="article" className="catalog-card catalog-card--lead" id="estoque">
+            <p className="kicker">Soluções personalizadas</p>
+            <h3>Personalizada para a sua necessidade.</h3>
+            <p>
+              Cada operação conta o estoque de um jeito. O controle de produtos,
+              entradas e saídas nasce da sua rotina.
+            </p>
+            <ul>
+              {stockPoints.map((point) => (
+                <li key={point}>{point}</li>
+              ))}
+            </ul>
+            <a className="btn btn-blue" href="/solucoes/personalizadas">
+              Abrir a página
+            </a>
+          </Reveal>
+
+          <Reveal as="article" className="catalog-card" id="varejo" delay={80}>
+            <div className="solution-title">
+              <img className="solution-mark" src="/brand/suavenda-icon.png" alt="" />
+              <div>
+                <p className="kicker">Soluções para o varejo</p>
+                <h3>SuaVenda</h3>
+              </div>
+            </div>
+            <p>
+              O PDV para quem vende no caixa. A venda fica no computador da loja,
+              inclusive no comércio por peso.
+            </p>
+            <ul>
+              {pdvPoints.map((point) => (
+                <li key={point}>{point}</li>
+              ))}
+            </ul>
+            <p className="fine-print">
+              A emissão de NFC-e em produção ainda está em preparação. O caixa já
+              organiza a venda no balcão.
+            </p>
+            <a className="btn btn-blue" href="/solucoes/varejo">
+              Abrir a página
+            </a>
+          </Reveal>
+
+          <Reveal as="article" className="catalog-card" id="publico" delay={140}>
+            <p className="kicker">Soluções para órgãos públicos</p>
+            <h3>Para quem atende a cidade.</h3>
+            <p>
+              Órgão, câmara e gestão pública, com processo claro e um sistema que
+              a equipe consiga usar.
+            </p>
+            <ul>
+              {publicPoints.map((point) => (
+                <li key={point}>{point}</li>
+              ))}
+            </ul>
+            <a className="btn btn-blue" href="/solucoes/orgaos-publicos">
+              Abrir a página
+            </a>
+          </Reveal>
         </div>
       </div>
     </section>

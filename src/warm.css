@@ -225,8 +225,21 @@ body.theme-sis .hero-glow {
   animation: sis-glow 8s ease-in-out infinite;
 }
 
-body.theme-sis .hero-inner {
+body.theme-sis .hero > .container.hero-inner {
+  display: grid;
+  gap: 8px;
+  align-items: center;
+}
+
+body.theme-sis .hero-visual {
+  margin: 0;
+}
+
+body.theme-sis .hero-visual img {
   display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 20px;
 }
 
 body.theme-sis .kicker {
@@ -438,6 +451,7 @@ body.theme-sis .catalog-card li::before {
 body.theme-sis .catalog-card .fine-print {
   margin-top: auto;
   margin-bottom: 12px;
+  color: var(--muted);
   font-size: 0.78rem;
 }
 
@@ -808,6 +822,17 @@ body.theme-sis .legal-content a {
 }
 
 @media (min-width: 980px) {
+  body.theme-sis .hero > .container.hero-inner {
+    grid-template-columns: minmax(0, 1.05fr) minmax(280px, 0.95fr);
+    gap: 20px;
+  }
+
+  body.theme-sis .hero-visual img {
+    height: 420px;
+    object-fit: cover;
+    object-position: 72% center;
+  }
+
   body.theme-sis .catalog {
     grid-template-columns: repeat(3, minmax(0, 1fr));
     align-items: stretch;
